@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class order{
     
     private int[] orderArray = new int[4];
@@ -26,6 +28,11 @@ public class order{
 
     public void setOrderArray(int[] orderArray) {
         this.orderArray = orderArray;
+    }
+
+    @Override
+    public String toString() {
+        return "order [orderArray=" + Arrays.toString(orderArray) + "]";
     }
 
     

@@ -17,18 +17,21 @@ public class control {
             setWhitePins(0);
         } else {
             int[] workarray = toCompare.getOrderArray();
+            int[] workarraySample = sample.getOrderArray();
             int bP = 0;
             int wP = 0;
             for (int i = 0; i < workarray.length; i++) {
-                if (workarray[i] == sample.getOrderArrayNumber(i)) {
-                    workarray[i] = -1;    
+                if (workarray[i] == workarraySample[i]) {
+                    workarray[i] = -1;
+                    workarraySample[i] = -2;    
                     bP++;
                 }
             }
             for (int i = 0; i < workarray.length; i++) {
-                for (int j = 0; j < sample.getOrderArray().length; j++) {
-                    if (workarray[i] == sample.getOrderArrayNumber(j)) {
+                for (int j = 0; j < workarraySample.length; j++) {
+                    if (workarray[i] == workarraySample[j]) {
                         workarray[i] = -1;
+                        //workarraySample[j] = -2;
                         wP++;
                     }
                 }
