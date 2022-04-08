@@ -23,7 +23,7 @@ public class control {
             for (int i = 0; i < workarray.length; i++) {
                 if (workarray[i] == workarraySample[i]) {
                     workarray[i] = -1;
-                    workarraySample[i] = -2;    
+                    //workarraySample[i] = -2;    
                     bP++;
                 }
             }
