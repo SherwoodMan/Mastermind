@@ -26,6 +26,15 @@ public class order{
         
     }
 
+    public void setOrderArrayNumber(int x, int z){
+        if (x < orderArray.length && x >= 0) {
+            orderArray[x] = z;
+        } else {
+            System.out.println("Außerhalb vom Array");
+        }
+        
+    }
+
     public void setOrderArray(int[] orderArray) {
         this.orderArray = orderArray;
     }

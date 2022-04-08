@@ -1,5 +1,5 @@
 Gruppenname :
-
+            SuperMinds
 Mitglieder: 
             Daniel Balzer
             Miguel del Rio Esteban
