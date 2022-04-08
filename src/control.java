@@ -10,20 +10,21 @@ public class control {
 
 
     public void compare( order sample, order toCompare)  {
+        int[] workarraySample = {sample.getOrderArrayNumber(0),sample.getOrderArrayNumber(1),sample.getOrderArrayNumber(2),sample.getOrderArrayNumber(3)};
+        int[] workarray = toCompare.getOrderArray();
         setBlackPins(0);
         setWhitePins(0);
         if (sample.getOrderArray().equals(toCompare.getOrderArray())) {
             setBlackPins(4);
             setWhitePins(0);
         } else {
-            int[] workarray = toCompare.getOrderArray();
-            int[] workarraySample = sample.getOrderArray();
+            
             int bP = 0;
             int wP = 0;
             for (int i = 0; i < workarray.length; i++) {
                 if (workarray[i] == workarraySample[i]) {
                     workarray[i] = -1;
-                    //workarraySample[i] = -2;    
+                    workarraySample[i] = -2;    
                     bP++;
                 }
             }
@@ -31,7 +32,7 @@ public class control {
                 for (int j = 0; j < workarraySample.length; j++) {
                     if (workarray[i] == workarraySample[j]) {
                         workarray[i] = -1;
-                        //workarraySample[j] = -2;
+                        workarraySample[j] = -2;
                         wP++;
                     }
                 }
