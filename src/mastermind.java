@@ -32,8 +32,10 @@ public class mastermind {
         
 
         System.out.println(sample.toString());
-        
+        int versuch = 0;
         do{
+            versuch++;
+            System.out.println("Versuch:" + versuch);
             int zeroC = (int) (Math.random() * 6);
             int oneC = (int) (Math.random() * 6);
             int twoC = (int) (Math.random() * 6);
