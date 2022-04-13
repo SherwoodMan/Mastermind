@@ -1,39 +1,37 @@
 public class mastermind {
 
-    private static boolean multiplePins;
-    
-    
+    private static boolean multiplePins = false;
+    private static boolean easyMode;
+
     public mastermind() {
     }
 
-
     public static void main(String[] args) {
         control con = new control();
-        order sample = new order(-1,-1, -1, -1);
+        order sample = new order(-1, -1, -1, -1);
 
-        int zero, one,two,three;
+        int zero, one, two, three;
 
-        do{
+        do {
             zero = (int) (Math.random() * 6);
-        }while (con.doubledPins(sample.getOrderArray(), zero) && multiplePins == true);
+        } while (con.doubledPins(sample.getOrderArray(), zero) && multiplePins == true);
         sample.getOrderArray()[0] = zero;
-        do{
+        do {
             one = (int) (Math.random() * 6);
-        }while (con.doubledPins(sample.getOrderArray(), one) && multiplePins == true);
+        } while (con.doubledPins(sample.getOrderArray(), one) && multiplePins == true);
         sample.getOrderArray()[1] = one;
-        do{
+        do {
             two = (int) (Math.random() * 6);
-        }while (con.doubledPins(sample.getOrderArray(), two) && multiplePins == true);
+        } while (con.doubledPins(sample.getOrderArray(), two) && multiplePins == true);
         sample.getOrderArray()[2] = two;
-        do{
+        do {
             three = (int) (Math.random() * 6);
-        }while (con.doubledPins(sample.getOrderArray(), three) && multiplePins == true); 
+        } while (con.doubledPins(sample.getOrderArray(), three) && multiplePins == true);
         sample.getOrderArray()[3] = three;
-        
 
         System.out.println(sample.toString());
         int versuch = 0;
-        do{
+        do {
             versuch++;
             System.out.println("Versuch:" + versuch);
             int zeroC = (int) (Math.random() * 6);
@@ -43,8 +41,7 @@ public class mastermind {
             order toCompare = new order(zeroC, oneC, twoC, threeC);
             System.out.println(sample.toString());
             System.out.println(toCompare.toString());
-            con.compare(sample, toCompare);
-            
+            con.compare(sample, toCompare, easyMode);
 
         } while (con.getBlackPins() < 4);
 
@@ -54,12 +51,16 @@ public class mastermind {
         return multiplePins;
     }
 
-
     public void setMultiplePins(boolean multiplePins) {
         this.multiplePins = multiplePins;
     }
 
-    
+    public static boolean isEasyMode() {
+        return easyMode;
+    }
 
+    public static void setEasyMode(boolean easyMode) {
+        mastermind.easyMode = easyMode;
+    }
 
 }
