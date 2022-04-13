@@ -44,6 +44,13 @@ public class order{
         this.orderArray = orderArray;
     }
 
+    public void setOrderArrayWithInts(int zero, int one, int two, int three) {
+        this.orderArray[0] = zero;
+        this.orderArray[1] = one;
+        this.orderArray[2] = two;
+        this.orderArray[3] = three;
+    }
+
     @Override
     public String toString() {
         return "order [orderArray=" + Arrays.toString(orderArray) + "]";

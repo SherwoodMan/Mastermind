@@ -4,8 +4,7 @@ public class control {
     private int blackPins;
 
     
-    public control(order sample, order toCompare) {
-        compare(sample, toCompare);
+    public control() {
     }
 
 
@@ -66,6 +65,15 @@ public class control {
     public void setBlackPins(int blackPins) {
         this.blackPins = blackPins;
     }
+
+    public boolean doubledPins(int[] sample, int pin){
+        for (int index = 0; index < sample.length; index++) {
+            if(sample[index] == pin){
+                System.out.println(pin + " ist doppelt eingegeben worden, obwohl ein Spiel ohne Dopplung ausgewählt wurde");
+                return true;
+            }
+        }   
+        return false; 
+        }
+    }
     
-    
-}
