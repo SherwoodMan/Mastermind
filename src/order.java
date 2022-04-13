@@ -11,6 +11,11 @@ public class order{
         this.orderArray[3] = three;
 
     }
+    
+
+    public order() {
+    }
+
 
     public int[] getOrderArray() {
         return orderArray;
