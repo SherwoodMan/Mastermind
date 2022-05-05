@@ -6,7 +6,7 @@ public class control {
     public control() {
     }
 
-    public void compare(order sample, order toCompare, boolean easyMode) {
+    public pins compare(order sample, order toCompare) {
         int[] workarraySample = { sample.getOrderArrayNumber(0), sample.getOrderArrayNumber(1),
                 sample.getOrderArrayNumber(2), sample.getOrderArrayNumber(3) };
         int[] workarray = toCompare.getOrderArray();
@@ -22,9 +22,7 @@ public class control {
             for (int i = 0; i < workarray.length; i++) {
                 if (workarray[i] == workarraySample[i]) {
                     workarray[i] = -1;
-                    if (easyMode) {
                         workarraySample[i] = -2;
-                    }
 
                     bP++;
                 }
@@ -33,9 +31,8 @@ public class control {
                 for (int j = 0; j < workarraySample.length; j++) {
                     if (workarray[i] == workarraySample[j]) {
                         workarray[i] = -1;
-                        if (easyMode) {
                             workarraySample[j] = -2;
-                        }
+                        
                         wP++;
                     }
                 }
@@ -44,9 +41,9 @@ public class control {
             setWhitePins(wP);
 
         }
-        // System.out.println("White Pins = " + whitePins);
-        // System.out.println("Black Pins = " + blackPins);
-
+        System.out.println("White Pins = " + whitePins);
+        System.out.println("Black Pins = " + blackPins);
+        return new pins(whitePins,blackPins);
     }
 
     public int getWhitePins() {
