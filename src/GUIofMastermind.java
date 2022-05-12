@@ -172,6 +172,11 @@ public class GUIofMastermind extends JFrame implements ActionListener {
 		}
 	}
 
+	public Color[] returnColor(Color colorZero,Color colorOne, Color colorTwo, Color colorThree){
+		Color[] color = {colorZero,colorOne,colorTwo,colorThree};
+		return color;
+	}
+
 	public static void main(String[] args) {
 		GUIofMastermind newgame = new GUIofMastermind();
 		JFrame box = new JFrame();
