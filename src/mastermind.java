@@ -1,13 +1,13 @@
 public class mastermind {
- 
+
     private static control con = new control();
     private static order toGuess = new order();
-    
+
     public static void main(String[] args) {
         randomOrder(toGuess);
         System.out.println(toGuess.toString());
-        GUIofMastermind newgame = new GUIofMastermind();
-		newgame.initializeStart();
+        guiVersionTwo newgame = new guiVersionTwo();
+        newgame.initializeStart();
 
     }
 
@@ -34,7 +34,7 @@ public class mastermind {
         return randomOrder;
     }
 
-    public static order getToGuess(){
+    public static order getToGuess() {
         return toGuess;
     }
 
