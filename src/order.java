@@ -13,34 +13,28 @@ public class order {
 
     }
 
-    public order(Color zeroC, Color oneC, Color twoC, Color threeC){
-        Color[] colorArray = {zeroC, oneC, twoC, threeC};
+    public order(Color zeroC, Color oneC, Color twoC, Color threeC) {
+        Color[] colorArray = { zeroC, oneC, twoC, threeC };
         for (int i = 0; i < colorArray.length; i++) {
-            if (colorArray[i]  == Color.red) {
+            if (colorArray[i] == Color.red) {
                 this.setOrderArrayNumber(i, 0);
-            }
-            else if(colorArray[i] == Color.blue){
+            } else if (colorArray[i] == Color.blue) {
                 this.setOrderArrayNumber(i, 1);
-            }
-            else if(colorArray[i] == Color.green){
+            } else if (colorArray[i] == Color.green) {
                 this.setOrderArrayNumber(i, 2);
-            }
-            else if(colorArray[i] == Color.yellow){
+            } else if (colorArray[i] == Color.yellow) {
                 this.setOrderArrayNumber(i, 3);
-            }
-            else if(colorArray[i] == Color.MAGENTA){
+            } else if (colorArray[i] == Color.MAGENTA) {
                 this.setOrderArrayNumber(i, 4);
-            }
-            else if(colorArray[i] == Color.darkGray){
+            } else if (colorArray[i] == Color.darkGray) {
                 this.setOrderArrayNumber(i, 5);
-            }
-            else{
+            } else {
                 this.setOrderArrayNumber(i, -3);
             }
         }
 
         System.out.println(this.toString());
-        
+
     }
 
     public order() {
@@ -85,35 +79,49 @@ public class order {
         return "order [orderArray=" + Arrays.toString(orderArray) + "]";
     }
 
-
-    public order colorInOrder(Color zeroC, Color oneC, Color twoC, Color threeC){
+    public order colorInOrder(Color zeroC, Color oneC, Color twoC, Color threeC) {
         order colorOrder = new order();
-        Color[] colorArray = {zeroC, oneC, twoC, threeC};
+        Color[] colorArray = { zeroC, oneC, twoC, threeC };
         for (int i = 0; i < colorArray.length; i++) {
             if (colorArray[i].equals(Color.red)) {
-                colorOrder.setOrderArrayNumber(i, 26);
-            }
-            else if(colorArray[i].equals(Color.blue)){
+                colorOrder.setOrderArrayNumber(i, 0);
+            } else if (colorArray[i].equals(Color.blue)) {
                 colorOrder.setOrderArrayNumber(i, 1);
-            }
-            else if(colorArray[i].equals(Color.green)){
+            } else if (colorArray[i].equals(Color.green)) {
                 colorOrder.setOrderArrayNumber(i, 2);
-            }
-            else if(colorArray[i].equals(Color.yellow)){
+            } else if (colorArray[i].equals(Color.yellow)) {
                 colorOrder.setOrderArrayNumber(i, 3);
-            }
-            else if(colorArray[i].equals(Color.MAGENTA)){
+            } else if (colorArray[i].equals(Color.MAGENTA)) {
                 colorOrder.setOrderArrayNumber(i, 4);
-            }
-            else if(colorArray[i].equals(Color.darkGray)){
+            } else if (colorArray[i].equals(Color.darkGray)) {
                 colorOrder.setOrderArrayNumber(i, 5);
-            }
-            else{
+            } else {
                 colorOrder.setOrderArrayNumber(i, -3);
             }
         }
-        
+
         return colorOrder;
     }
 
+    public Color[] orderInColor() {
+        Color[] colorArray = new Color[4];
+        for (int i = 0; i < colorArray.length; i++) {
+            if (orderArray[i] == 0) {
+                colorArray[i] = Color.red;
+            } else if (orderArray[i] == 1) {
+                colorArray[i] = Color.blue;
+            } else if (orderArray[i] == 2) {
+                colorArray[i] = Color.green;
+            } else if (orderArray[i] == 3) {
+                colorArray[i] = Color.yellow;
+            } else if (orderArray[i] == 4) {
+                colorArray[i] = Color.MAGENTA;
+            } else if (orderArray[i] == 5) {
+                colorArray[i] = Color.darkGray;
+            }
+        }
+
+        return colorArray;
+
+    }
 }

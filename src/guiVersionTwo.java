@@ -10,13 +10,15 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 
 public class guiVersionTwo extends JFrame implements ActionListener{
 
     private int turn;
-	private JTable Signale;
-	private JTable Stecker;
+	private boolean guesser;
+	private drawingGuesserField drawnField;
+	private drawingMasterField drawnMaster;
+
+    
 	private Color[] colors = { Color.red, Color.blue, Color.green, Color.yellow, Color.MAGENTA, Color.darkGray };
 	private ArrayList<String> colorsS = new ArrayList<String>();
 	private ArrayList<String> colorsN = new ArrayList<String>();
@@ -33,11 +35,11 @@ public class guiVersionTwo extends JFrame implements ActionListener{
 				JOptionPane.YES_OPTION, JOptionPane.NO_OPTION, logo, options, options[0]);
 
 		if (n == JOptionPane.YES_OPTION) {
-			System.exit(0);
+			this.initializeMasterBoard();
 		} else if (n == JOptionPane.NO_OPTION) {
 			System.out.println("funktioniert");
 
-			this.initializeBoard();
+			this.initializeGuesserBoard();
 		}
 	}
 
@@ -45,8 +47,9 @@ public class guiVersionTwo extends JFrame implements ActionListener{
 
 	
 
-    private void initializeBoard() {
-        drawingField drawnField = new drawingField();
+    private void initializeMasterBoard() {
+		drawnMaster = new drawingMasterField();
+        
         tempName = new JButton[2][6];
 		selectedColor = Color.WHITE;
 		selectedColumn = -1;
@@ -90,8 +93,65 @@ public class guiVersionTwo extends JFrame implements ActionListener{
 			tempName[1][x].setActionCommand(colorsS.get(x));
 		    panel.add(tempName[1][x]);
 		}
-        drawnField.paintPins(2, new pins(2, 2));
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        frame.add(drawnMaster,BorderLayout.CENTER);
+        frame.add(panel,BorderLayout.SOUTH);
+		frame.setLocationRelativeTo(null);
+		frame.setResizable(false);
+
+	}
+
+
+
+
+
+	private void initializeGuesserBoard() {
+        drawnField = new drawingGuesserField();
         
+        tempName = new JButton[2][6];
+		selectedColor = Color.WHITE;
+		selectedColumn = -1;
+		String[] colorsA = { "RED", "BLUE", "GREEN", "YELLOW", "MAGENTA", "DARK_GRAY" };
+		String[] colorsNA = { "1", "2", "3", "4" };
+		for (String s : colorsA) {
+			colorsS.add(s);
+		}
+		for (String h : colorsNA) {
+			colorsN.add(h);
+		}
+        JFrame frame = new JFrame();
+        frame.setSize(1200, 700);
+		frame.setLayout(new  BorderLayout());
+		JPanel panel = new JPanel();
+        
+        tempName[0][0] = new JButton("CLEAR");
+		tempName[0][0].addActionListener(this);
+		tempName[0][0].setBackground(Color.PINK);
+		tempName[0][0].setActionCommand("CLEAR");
+		panel.add(tempName[0][0]);
+
+		for (int y = 1; y < 5; y++) {
+			tempName[0][y] = new JButton("" + y);
+			tempName[0][y].addActionListener(this);
+			tempName[0][y].setBackground(Color.WHITE);
+			tempName[0][y].setActionCommand("" + y);
+			panel.add(tempName[0][y]);
+		}
+
+		tempName[0][5] = new JButton("CHECK");
+		tempName[0][5].addActionListener(this);
+		tempName[0][5].setBackground(Color.PINK);
+		tempName[0][5].setActionCommand("CHECK");
+		panel.add(tempName[0][5]);
+
+		for (int x = 0; x < 6; x++) {
+			tempName[1][x] = new JButton("");
+			tempName[1][x].addActionListener(this);
+			tempName[1][x].setBackground(colors[x]);
+			tempName[1][x].setActionCommand(colorsS.get(x));
+		    panel.add(tempName[1][x]);
+		}
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.add(drawnField,BorderLayout.CENTER);
@@ -134,7 +194,11 @@ public class guiVersionTwo extends JFrame implements ActionListener{
 			}
 			if (checkable) {
 				order toCompare = new order(tempName[0][1].getBackground(), tempName[0][2].getBackground(), tempName[0][3].getBackground(), tempName[0][4].getBackground());
-				mastermind.getCon().compare(mastermind.getToGuess(), toCompare);
+				drawnField.paintOrder(turn, toCompare);
+				drawnField.paintPins(turn, mastermind.getCon().compare(mastermind.getToGuess(), toCompare));
+				turn ++;
+				
+
 				this.clearBoard();
 			}
 			selectedColumn = -1;
@@ -145,7 +209,7 @@ public class guiVersionTwo extends JFrame implements ActionListener{
 
     public static void main(String[] args) {
         guiVersionTwo gui = new guiVersionTwo();
-        gui.initializeBoard();
+        gui.initializeGuesserBoard();
         
         
         

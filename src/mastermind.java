@@ -1,15 +1,39 @@
+
+import java.awt.Color;
+
 public class mastermind {
- 
+
     private static control con = new control();
     private static order toGuess = new order();
-    
+    private static Color[][] guesses = new Color[4][12];
+    private static Color[][] reaction = new Color[4][12];
+
     public static void main(String[] args) {
         randomOrder(toGuess);
         System.out.println(toGuess.toString());
-        GUIofMastermind newgame = new GUIofMastermind();
-		newgame.initializeStart();
+        greyingArray();
+        guiVersionTwo newgame = new guiVersionTwo();
+        newgame.initializeStart();
 
     }
+
+    public static Color[][] getGuesses() {
+        return guesses;
+    }
+
+    public static void setGuesses(Color[][] guesses) {
+        mastermind.guesses = guesses;
+    }
+
+    public static Color[][] getReaction() {
+        return reaction;
+    }
+
+    public static void setReaction(Color[][] reaction) {
+        mastermind.reaction = reaction;
+    }
+
+    
 
     public static order randomOrder(order randomOrder) {
         int zero, one, two, three;
@@ -34,7 +58,24 @@ public class mastermind {
         return randomOrder;
     }
 
-    public static order getToGuess(){
+    private static void greyingArray() {
+        for (int i = 0; i < guesses.length; i++) {
+            for (int j = 0; j < guesses[1].length; j++) {
+                if (guesses[i][j] == null) {
+                    guesses[i][j] = Color.GRAY;
+                }
+            }
+        }
+        for (int i = 0; i < reaction.length; i++) {
+            for (int j = 0; j < reaction[1].length; j++) {
+                if (reaction[i][j] == null) {
+                    reaction[i][j] = Color.GRAY;
+                }
+            }
+        }
+    }
+
+    public static order getToGuess() {
         return toGuess;
     }
 
