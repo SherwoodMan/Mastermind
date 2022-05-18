@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,26 +11,26 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.plaf.DimensionUIResource;
 
-public class guiVersionTwo extends JFrame implements ActionListener{
+public class guiVersionTwo extends JFrame implements ActionListener {
 
-    private int turn;
-	private boolean guesser;
 	private drawingGuesserField drawnField;
 	private drawingMasterField drawnMaster;
 
-    
+
 	private Color[] colors = { Color.red, Color.blue, Color.green, Color.yellow, Color.MAGENTA, Color.darkGray };
 	private ArrayList<String> colorsS = new ArrayList<String>();
 	private ArrayList<String> colorsN = new ArrayList<String>();
 	private JButton[][] tempName;
 	private Color selectedColor;
 	private int selectedColumn;
-    
-    public void initializeStart(){
+
+	public void initializeStart() {
 		JFrame box = new JFrame();
-		
-        ImageIcon logo = new ImageIcon(new ImageIcon("Mastermind_logo.png").getImage().getScaledInstance(400, 320, Image.SCALE_DEFAULT));
+
+		ImageIcon logo = new ImageIcon(
+				new ImageIcon("Mastermind_logo.png").getImage().getScaledInstance(400, 320, Image.SCALE_DEFAULT));
 		Object[] options = { "Spieler 1", "Spieler 2" };
 		int n = JOptionPane.showOptionDialog(box, "Welcher Spieler bist du?", "Mastermind",
 				JOptionPane.YES_OPTION, JOptionPane.NO_OPTION, logo, options, options[0]);
@@ -44,10 +45,7 @@ public class guiVersionTwo extends JFrame implements ActionListener{
 	}
 
 
-
-	
-
-    private void initializeMasterBoard() {
+	private void initializeMasterBoard() {
 		drawnMaster = new drawingMasterField();
         
         tempName = new JButton[2][6];
@@ -61,12 +59,12 @@ public class guiVersionTwo extends JFrame implements ActionListener{
 		for (String h : colorsNA) {
 			colorsN.add(h);
 		}
-        JFrame frame = new JFrame();
-        frame.setSize(1200, 700);
-		frame.setLayout(new  BorderLayout());
+		JFrame frame = new JFrame();
+		frame.setSize(1200, 700);
+		frame.setLayout(new BorderLayout());
 		JPanel panel = new JPanel();
-        
-        tempName[0][0] = new JButton("CLEAR");
+
+		tempName[0][0] = new JButton("CLEAR");
 		tempName[0][0].addActionListener(this);
 		tempName[0][0].setBackground(Color.PINK);
 		tempName[0][0].setActionCommand("CLEAR");
@@ -74,6 +72,7 @@ public class guiVersionTwo extends JFrame implements ActionListener{
 
 		for (int y = 1; y < 5; y++) {
 			tempName[0][y] = new JButton("" + y);
+			tempName[0][y].setPreferredSize(new DimensionUIResource(100, 25));
 			tempName[0][y].addActionListener(this);
 			tempName[0][y].setBackground(Color.WHITE);
 			tempName[0][y].setActionCommand("" + y);
@@ -88,10 +87,12 @@ public class guiVersionTwo extends JFrame implements ActionListener{
 
 		for (int x = 0; x < 6; x++) {
 			tempName[1][x] = new JButton("");
+			tempName[1][x].setPreferredSize(new DimensionUIResource(100, 25));
 			tempName[1][x].addActionListener(this);
 			tempName[1][x].setBackground(colors[x]);
 			tempName[1][x].setActionCommand(colorsS.get(x));
-		    panel.add(tempName[1][x]);
+
+			panel.add(tempName[1][x]);
 		}
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -101,10 +102,6 @@ public class guiVersionTwo extends JFrame implements ActionListener{
 		frame.setResizable(false);
 
 	}
-
-
-
-
 
 	private void initializeGuesserBoard() {
         drawnField = new drawingGuesserField();
@@ -158,10 +155,10 @@ public class guiVersionTwo extends JFrame implements ActionListener{
         frame.add(panel,BorderLayout.SOUTH);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
-    }
 
+	}
 
-    public void clearBoard(){
+	public void clearBoard() {
 		for (int x = 1; x < 5; x++) {
 			tempName[0][x].setBackground(Color.WHITE);
 		}
@@ -169,7 +166,7 @@ public class guiVersionTwo extends JFrame implements ActionListener{
 		selectedColor = Color.WHITE;
 	}
 
-    public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) {
 		if (colorsS.contains(e.getActionCommand())) {
 			selectedColor = colors[colorsS.indexOf(e.getActionCommand())];
 		} else if (colorsN.contains(e.getActionCommand())) {
@@ -190,13 +187,13 @@ public class guiVersionTwo extends JFrame implements ActionListener{
 				if (tempName[0][x].getBackground().equals(Color.WHITE)) {
 					System.out.println("Error");
 					checkable = false;
-				} 
+				}
 			}
 			if (checkable) {
 				order toCompare = new order(tempName[0][1].getBackground(), tempName[0][2].getBackground(), tempName[0][3].getBackground(), tempName[0][4].getBackground());
-				drawnField.paintOrder(turn, toCompare);
-				drawnField.paintPins(turn, mastermind.getCon().compare(mastermind.getToGuess(), toCompare));
-				turn ++;
+				drawnField.paintOrder(mastermind.getRound(), toCompare);
+				drawnField.paintPins(mastermind.getRound(), mastermind.getCon().compare(mastermind.getToGuess(), toCompare));
+				mastermind.setRound(mastermind.getRound()+1);
 				
 
 				this.clearBoard();
@@ -207,11 +204,35 @@ public class guiVersionTwo extends JFrame implements ActionListener{
 
 	}
 
-    public static void main(String[] args) {
-        guiVersionTwo gui = new guiVersionTwo();
-        gui.initializeGuesserBoard();
-        
-        
-        
-    }
-}
+	public static void main(String[] args) {
+		guiVersionTwo gui = new guiVersionTwo();
+		gui.initializeMasterBoard();
+
+	}
+
+	
+	
+	}
+	
+		
+		
+	
+	
+			
+					
+
+	
+	
+			
+					 
+	
+
+	
+
+	
+		
+		
+
+	
+
+	

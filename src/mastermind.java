@@ -7,6 +7,7 @@ public class mastermind {
     private static order toGuess = new order();
     private static Color[][] guesses = new Color[4][12];
     private static Color[][] reaction = new Color[4][12];
+    private static int round;
 
     public static void main(String[] args) {
         randomOrder(toGuess);
@@ -15,6 +16,14 @@ public class mastermind {
         guiVersionTwo newgame = new guiVersionTwo();
         newgame.initializeStart();
 
+    }
+
+    public static int getRound() {
+        return round;
+    }
+
+    public static void setRound(int round) {
+        mastermind.round = round;
     }
 
     public static Color[][] getGuesses() {

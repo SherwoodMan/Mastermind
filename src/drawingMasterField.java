@@ -67,8 +67,6 @@ public class drawingMasterField extends JPanel {
     public void paintPins(int turn, pins pinObject) {
         int blackPins = pinObject.getBlackPins();
         int whitePins = pinObject.getWhitePins();
-        int y = 220;
-        int x = 75;
         if (whitePins > 0) {
             mastermind.getReaction()[0][turn] = Color.WHITE;
             whitePins--;
