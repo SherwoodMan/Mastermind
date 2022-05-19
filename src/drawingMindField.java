@@ -8,7 +8,7 @@ import java.awt.BasicStroke;
 
 import javax.swing.JPanel;
 
-public class drawingGuesserField extends JPanel {
+public class drawingMindField extends JPanel {
 
     private int staticX = 50;
     private int staticY = 100;
