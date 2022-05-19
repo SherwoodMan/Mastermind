@@ -10,37 +10,40 @@ import javax.swing.JPanel;
 
 public class drawingGuesserField extends JPanel {
 
+    private int staticX = 50;
+    private int staticY = 100;
+
 
 
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         Color background = new Color(87, 33, 8);
         g2d.setColor(background);
-        Rectangle2D field = new Rectangle2D.Double(50, 100, 900, 300);
+        Rectangle2D field = new Rectangle2D.Double(staticX, staticY, 900, 300);
         g2d.fill(field);
         g2d.setStroke(new BasicStroke(2));
-        g.fillPolygon(new int[] { 50, 950, 960, 60 }, new int[] { 400, 400, 420, 420 }, 4);
-        g.fillPolygon(new int[] { 950, 960, 960, 950 }, new int[] { 400, 420, 110, 100 }, 4);
+        g.fillPolygon(new int[] { staticX, 900 + staticX, 910 + staticX, 10 + staticX}, new int[] { 300 + staticY, 300 + staticY, 320 + staticY, 320 + staticY}, 4);
+        g.fillPolygon(new int[] { 900 + staticX, 910 + staticX, 910 + staticX, 900 + staticX}, new int[] { 300 + staticY, 320 + staticY , 10 + staticY, staticY }, 4);
         g2d.setColor(Color.BLACK);
-        Rectangle2D fieldSurrounding = new Rectangle2D.Double(50, 100, 900, 300);
+        Rectangle2D fieldSurrounding = new Rectangle2D.Double(staticX, staticY, 900, 300);
         g2d.draw(fieldSurrounding);
-        g.drawPolygon(new int[] { 50, 950, 960, 60 }, new int[] { 400, 400, 420, 420 }, 4);
-        g.drawPolygon(new int[] { 950, 960, 960, 950 }, new int[] { 400, 420, 110, 100 }, 4);
+        g.drawPolygon(new int[] { staticX, 900 + staticX, 910 + staticX, 10 + staticX}, new int[] { 300 + staticY, 300 + staticY, 320 + staticY, 320 + staticY}, 4);
+        g.drawPolygon(new int[] { 900 + staticX, 910 + staticX, 910 + staticX, 900 + staticX}, new int[] { 300 + staticY, 320 + staticY, 10 + staticY, staticY }, 4);
         g2d.setColor(background);
-        g.fillPolygon(new int[] { 800, 875, 900 }, new int[] { 300, 270, 300 }, 3);
-        g.fillPolygon(new int[] { 800, 875, 900 }, new int[] { 120, 90, 120 }, 3);
+        g.fillPolygon(new int[] { 750 + staticX, 825 + staticX, 850 + staticX}, new int[] { 200 + staticY, 170 + staticY, 300 + staticY}, 3);
+        g.fillPolygon(new int[] { 750 + staticX, 825 + staticX, 850 + staticX}, new int[] { 20 + staticY, -10 + staticY, 20 + staticY}, 3);
 
         g2d.setColor(Color.BLACK);
-        g.drawPolygon(new int[] { 800, 875, 900 }, new int[] { 300, 270, 300 }, 3);
-        g.drawPolygon(new int[] { 800, 875, 900 }, new int[] { 120, 90, 120 }, 3);
+        g.drawPolygon(new int[] { 750 + staticX, 825 + staticX, 850 + staticX}, new int[] { 200 + staticY, 170 + staticY, 200 + staticY}, 3);
+        g.drawPolygon(new int[] { 750 + staticX, 825 + staticX, 850 + staticX}, new int[] { 20 + staticY, -10 + staticY, 20 + staticY}, 3);
         g2d.setColor(background);
-        g.fillPolygon(new int[] { 800, 800, 875, 875 }, new int[] { 120, 300, 270, 90 }, 4);
+        g.fillPolygon(new int[] { 750 + staticX, 750 + staticX, 825 + staticX, 825 + staticX}, new int[] { 20 + staticY, 200 + staticY, 170 + staticY, -10 + staticY }, 4);
         g2d.setColor(Color.BLACK);
-        g.drawPolygon(new int[] { 800, 800, 875, 875 }, new int[] { 120, 300, 270, 90 }, 4);
+        g.drawPolygon(new int[] { 750 + staticX, 750 + staticX, 825 + staticX, 825 + staticX}, new int[] { 20 + staticY, 200 + staticY, 170 + staticY, -10 + staticY}, 4);
 
         g2d.setColor(Color.GRAY);
-        int x = 75;
-        int y = 120;
+        int x = 25 + staticX;
+        int y = 20 + staticY;
         for (int i = 0; i < mastermind.getGuesses()[1].length; i++) {
             for (int j = 0; j < mastermind.getGuesses().length; j++) {
 
@@ -50,7 +53,7 @@ public class drawingGuesserField extends JPanel {
 
             }
         }
-        y = 320;
+        y = 220 + staticY;
         for (int i = 0; i < mastermind.getReaction()[1].length; i++) {
 
             g2d.setColor(mastermind.getReaction()[0][i]);

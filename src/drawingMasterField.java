@@ -10,25 +10,28 @@ import javax.swing.JPanel;
 
 public class drawingMasterField extends JPanel {
 
+    private int staticX = 50;
+    private int staticY = 100;
+
 
 
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         Color background = new Color(87, 33, 8);
         g2d.setColor(background);
-        Rectangle2D field = new Rectangle2D.Double(50, 100, 900, 300);
+        Rectangle2D field = new Rectangle2D.Double(staticX, staticY, 900, 300);
         g2d.fill(field);
         g2d.setStroke(new BasicStroke(2));
-        g.fillPolygon(new int[] { 50, 950, 960, 60 }, new int[] { 400, 400, 420, 420 }, 4);
-        g.fillPolygon(new int[] { 950, 960, 960, 950 }, new int[] { 400, 420, 110, 100 }, 4);
+        g.fillPolygon(new int[] { staticX, 900 + staticX, 910 + staticX, 10 + staticX }, new int[] { 300 + staticY, 300 + staticY, 320 + staticY, 320 + staticY}, 4);
+        g.fillPolygon(new int[] { 900 + staticX, 910 + staticX, 910 + staticX, 900 + staticX}, new int[] { 300 + staticY, 320 + staticY, 10 + staticY, staticY}, 4);
         g2d.setColor(Color.BLACK);
-        Rectangle2D fieldSurrounding = new Rectangle2D.Double(50, 100, 900, 300);
+        Rectangle2D fieldSurrounding = new Rectangle2D.Double(staticX, staticY, 900, 300);
         g2d.draw(fieldSurrounding);
-        g.drawPolygon(new int[] { 50, 950, 960, 60 }, new int[] { 400, 400, 420, 420 }, 4);
-        g.drawPolygon(new int[] { 950, 960, 960, 950 }, new int[] { 400, 420, 110, 100 }, 4);
+        g.drawPolygon(new int[] { staticX, 900 + staticX, 910 + staticX, 10 + staticX}, new int[] { 300 + staticY, 300 + staticY, 320 + staticY, 320 + staticY}, 4);
+        g.drawPolygon(new int[] { 900 + staticX, 910 + staticX, 910 + staticX, 900 + staticX}, new int[] { 300 + staticY, 320 + staticY, 10 + staticY, staticY }, 4);
         g2d.setColor(Color.GRAY);
-        int x = 850;
-        int y = 120;
+        int x = 800 + staticX;
+        int y = 20 + staticY;
 
         Color[] colorsToGuess= mastermind.getToGuess().orderInColor();
         for (int i = 0; i < colorsToGuess.length; i++) {
@@ -37,7 +40,7 @@ public class drawingMasterField extends JPanel {
             g2d.setColor(Color.GRAY);
         }
 
-        x = 75;
+        x = 25 + staticX;
         for (int i = 0; i < mastermind.getGuesses()[1].length; i++) {
             for (int j = 0; j < mastermind.getGuesses().length; j++) {
 
@@ -47,7 +50,7 @@ public class drawingMasterField extends JPanel {
 
             }
         }
-        y = 320;
+        y = 220 + staticY;
         for (int i = 0; i < mastermind.getReaction()[1].length; i++) {
 
             g2d.setColor(mastermind.getReaction()[0][i]);
