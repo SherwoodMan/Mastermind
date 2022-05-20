@@ -70,7 +70,7 @@ public class mindGUI extends JFrame implements ActionListener {
 		}
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		drawnMind.setBounds(150, 0, 1100, 600);
+		drawnMind.setBounds(200, 100, 1100, 600);
 		frame.add(drawnMind);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);

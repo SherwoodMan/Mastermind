@@ -10,12 +10,13 @@ import javax.swing.JPanel;
 
 public class drawingMindField extends JPanel {
 
-    private int staticX = 50;
-    private int staticY = 100;
+    private int staticX = 0;
+    private int staticY = 0;
 
 
 
     public void paintComponent(Graphics g) {
+        super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         Color background = new Color(87, 33, 8);
         g2d.setColor(background);

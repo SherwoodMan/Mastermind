@@ -72,7 +72,7 @@ public class masterGUI extends JFrame implements ActionListener {
 		}
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		drawnMaster.setBounds(150, 0, 1100, 600);
+		drawnMaster.setBounds(200, 100, 1100, 600);
 		frame.add(drawnMaster);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
