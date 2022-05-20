@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 public class pins {
 
     private int whitePins;
@@ -19,6 +21,29 @@ public class pins {
     }
     this.blackPins = blackPins;
     this.whitePins = whitePins;
+    }
+
+    public pins(Color zeroC, Color oneC, Color twoC, Color threeC){
+        if (zeroC == Color.WHITE) {
+            this.whitePins ++;
+        } else {
+            this.blackPins ++;
+        }
+        if (oneC == Color.WHITE) {
+            this.whitePins ++;
+        } else {
+            this.blackPins ++;
+        }
+        if (twoC == Color.WHITE) {
+            this.whitePins ++;
+        } else {
+            this.blackPins ++;
+        }
+        if (threeC == Color.WHITE) {
+            this.whitePins ++;
+        } else {
+            this.blackPins ++;
+        }
     }
     
     public int getWhitePins() {
@@ -55,6 +80,7 @@ public class pins {
     this.blackPins = blackPins;
     }
     
+
     
     
     

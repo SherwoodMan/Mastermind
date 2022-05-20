@@ -1,20 +1,14 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.plaf.DimensionUIResource;
 
 public class mindGUI extends JFrame implements ActionListener {
 
-	private drawingMindField drawnField;
+	private drawingMindField drawnMind;
 
 	private Color[] colors = { Color.red, Color.blue, Color.green, Color.yellow, Color.MAGENTA, Color.darkGray };
 	private ArrayList<String> colorsS = new ArrayList<String>();
@@ -26,7 +20,7 @@ public class mindGUI extends JFrame implements ActionListener {
 	
 
 	public void initializeMindBoard() {
-		drawnField = new drawingMindField();
+		drawnMind = new drawingMindField();
 
 		tempName = new JButton[2][6];
 		selectedColor = Color.WHITE;
@@ -41,40 +35,43 @@ public class mindGUI extends JFrame implements ActionListener {
 		}
 		JFrame frame = new JFrame();
 		frame.setSize(1200, 700);
-		frame.setLayout(new BorderLayout());
-		JPanel panel = new JPanel();
+		frame.setLayout(null);
 
 		tempName[0][0] = new JButton("CLEAR");
 		tempName[0][0].addActionListener(this);
 		tempName[0][0].setBackground(Color.PINK);
 		tempName[0][0].setActionCommand("CLEAR");
-		panel.add(tempName[0][0]);
+		tempName[0][0].setBounds(10, 320, 85, 30);
+		frame.add(tempName[0][0]);
 
 		for (int y = 1; y < 5; y++) {
 			tempName[0][y] = new JButton("" + y);
 			tempName[0][y].addActionListener(this);
 			tempName[0][y].setBackground(Color.WHITE);
 			tempName[0][y].setActionCommand("" + y);
-			panel.add(tempName[0][y]);
+			tempName[0][y].setBounds(10, 70+ y*50, 180, 25);
+			frame.add(tempName[0][y]);
 		}
 
 		tempName[0][5] = new JButton("CHECK");
 		tempName[0][5].addActionListener(this);
 		tempName[0][5].setBackground(Color.PINK);
 		tempName[0][5].setActionCommand("CHECK");
-		panel.add(tempName[0][5]);
+		tempName[0][5].setBounds(105, 320, 85, 30);
+		frame.add(tempName[0][5]);
 
 		for (int x = 0; x < 6; x++) {
 			tempName[1][x] = new JButton("");
 			tempName[1][x].addActionListener(this);
 			tempName[1][x].setBackground(colors[x]);
 			tempName[1][x].setActionCommand(colorsS.get(x));
-			panel.add(tempName[1][x]);
+			tempName[1][x].setBounds(200+x*150, 10, 100, 50);
+			frame.add(tempName[1][x]);
 		}
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		frame.add(drawnField, BorderLayout.CENTER);
-		frame.add(panel, BorderLayout.SOUTH);
+		drawnMind.setBounds(150, 0, 1100, 600);
+		frame.add(drawnMind);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
 
@@ -114,8 +111,8 @@ public class mindGUI extends JFrame implements ActionListener {
 			if (checkable) {
 				order toCompare = new order(tempName[0][1].getBackground(), tempName[0][2].getBackground(),
 						tempName[0][3].getBackground(), tempName[0][4].getBackground());
-				drawnField.paintOrder(mastermind.getRound(), toCompare);
-				drawnField.paintPins(mastermind.getRound(),
+				drawnMind.paintOrder(mastermind.getRound(), toCompare);
+				drawnMind.paintPins(mastermind.getRound(),
 						mastermind.getCon().compare(mastermind.getToGuess(), toCompare));
 				mastermind.setRound(mastermind.getRound() + 1);
 
