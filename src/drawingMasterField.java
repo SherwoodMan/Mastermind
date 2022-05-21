@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 public class drawingMasterField extends JPanel {
 
     private int staticX = 0;
-    private int staticY = 0;
+    private int staticY = 20;
 
 
 
