@@ -13,7 +13,7 @@ public class mastermind {
         randomOrder(toGuess);
         System.out.println(toGuess.toString());
         greyingArray();
-        guiVersionTwo newgame = new guiVersionTwo();
+        mainGUI newgame = new mainGUI();
         newgame.initializeStart();
 
     }

@@ -1,11 +1,11 @@
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class guiVersionTwo extends JFrame {
-
+public class mainGUI extends JFrame {
 	private mindGUI mindGui;
 	private masterGUI masterGui;
 
@@ -26,5 +26,17 @@ public class guiVersionTwo extends JFrame {
 			mindGui.initializeMindBoard();
 		}
 	}
+
+	public void showTurn() {
+		new JOptionPane();
+		JOptionPane.showMessageDialog(null, "Du bist jetzt an der Reihe.", "Spielerinnerung", JOptionPane.OK_OPTION);
+	}
+
+	public void showTurnChange() {
+		new JOptionPane();
+		JOptionPane.showMessageDialog(null, "Dein Mitspieler ist nun an der Reihe.", "Spielerwechselerinnerung",
+				JOptionPane.OK_OPTION);
+	}
+
 
 }

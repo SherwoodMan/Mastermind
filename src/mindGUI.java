@@ -33,7 +33,7 @@ public class mindGUI extends JFrame implements ActionListener {
 		for (String h : colorsNA) {
 			colorsN.add(h);
 		}
-		JFrame frame = new JFrame();
+		JFrame frame = new JFrame("MindFrame");
 		frame.setSize(1200, 700);
 		frame.setLayout(null);
 

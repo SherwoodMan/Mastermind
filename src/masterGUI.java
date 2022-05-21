@@ -1,6 +1,4 @@
 import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -33,7 +31,7 @@ public class masterGUI extends JFrame implements ActionListener {
 		for (String h : colorsNA) {
 			colorsN.add(h);
 		}
-		JFrame frame = new JFrame();
+		JFrame frame = new JFrame("MasterFrame");
 		frame.setSize(1200, 700);
 		frame.setLayout(null);
 
