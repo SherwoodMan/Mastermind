@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-public class masterGUI extends JFrame implements ActionListener {
+public class MasterGUI extends JFrame implements ActionListener {
 
-	private drawingMasterField drawnMaster;
+	private DrawingMasterField drawnMaster;
 
 	private Color[] colors = { Color.BLACK, Color.WHITE };
 	private ArrayList<String> colorsS = new ArrayList<String>();
@@ -18,7 +18,7 @@ public class masterGUI extends JFrame implements ActionListener {
 	private int selectedColumn;
 
 	public void initializeMasterBoard() {
-		drawnMaster = new drawingMasterField();
+		drawnMaster = new DrawingMasterField();
 
 		tempName = new JButton[2][6];
 		selectedColor = Color.GRAY;
@@ -101,10 +101,10 @@ public class masterGUI extends JFrame implements ActionListener {
 			this.clearBoard();
 		}
 		if ("CHECK".equals(e.getActionCommand())) {
-			pins toCompare = new pins(tempName[0][1].getBackground(), tempName[0][2].getBackground(),
+			Pins toCompare = new Pins(tempName[0][1].getBackground(), tempName[0][2].getBackground(),
 					tempName[0][3].getBackground(), tempName[0][4].getBackground());
-			drawnMaster.paintPins(mastermind.getRound(), toCompare);
-			mastermind.setRound(mastermind.getRound() + 1);
+			drawnMaster.paintPins(Mastermind.getRound(), toCompare);
+			Mastermind.setRound(Mastermind.getRound() + 1);
 			this.clearBoard();
 			selectedColumn = -1;
 			selectedColor = Color.WHITE;

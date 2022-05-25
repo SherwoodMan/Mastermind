@@ -1,11 +1,11 @@
 import java.awt.Color;
 
-public class pins {
+public class Pins {
 
     private int whitePins;
     private int blackPins;
     
-    public pins(int whitePins, int blackPins) {
+    public Pins(int whitePins, int blackPins) {
     
     if(whitePins == 4 && blackPins == 4){
     this.blackPins = -1;
@@ -23,7 +23,7 @@ public class pins {
     this.whitePins = whitePins;
     }
 
-    public pins(Color zeroC, Color oneC, Color twoC, Color threeC){
+    public Pins(Color zeroC, Color oneC, Color twoC, Color threeC){
         if (zeroC == Color.WHITE) {
             this.whitePins ++;
         } else {

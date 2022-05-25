@@ -1,11 +1,11 @@
 import java.awt.Color;
 import java.util.Arrays;
 
-public class order {
+public class Order {
 
     private int[] orderArray = new int[4];
 
-    public order(int zero, int one, int two, int three) {
+    public Order(int zero, int one, int two, int three) {
         this.orderArray[0] = zero;
         this.orderArray[1] = one;
         this.orderArray[2] = two;
@@ -13,7 +13,7 @@ public class order {
 
     }
 
-    public order(Color zeroC, Color oneC, Color twoC, Color threeC) {
+    public Order(Color zeroC, Color oneC, Color twoC, Color threeC) {
         Color[] colorArray = { zeroC, oneC, twoC, threeC };
         for (int i = 0; i < colorArray.length; i++) {
             if (colorArray[i] == Color.red) {
@@ -37,7 +37,7 @@ public class order {
 
     }
 
-    public order() {
+    public Order() {
     }
 
     public int[] getOrderArray() {
@@ -76,11 +76,11 @@ public class order {
 
     @Override
     public String toString() {
-        return "order [orderArray=" + Arrays.toString(orderArray) + "]";
+        return "Order [orderArray=" + Arrays.toString(orderArray) + "]";
     }
 
-    public order colorInOrder(Color zeroC, Color oneC, Color twoC, Color threeC) {
-        order colorOrder = new order();
+    public Order colorInOrder(Color zeroC, Color oneC, Color twoC, Color threeC) {
+        Order colorOrder = new Order();
         Color[] colorArray = { zeroC, oneC, twoC, threeC };
         for (int i = 0; i < colorArray.length; i++) {
             if (colorArray[i].equals(Color.red)) {

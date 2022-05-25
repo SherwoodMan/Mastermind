@@ -1,26 +1,20 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.Color;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.event.MouseInputListener;
 import javax.swing.plaf.DimensionUIResource;
 
-public class toGuess extends JFrame implements ActionListener {
+public class ToGuess extends JFrame implements ActionListener {
 
 	private final class MouseInputListenerImplementation implements MouseInputListener {
 	}
@@ -168,17 +162,17 @@ public class toGuess extends JFrame implements ActionListener {
 			this.clearBoard();
 		}
 		if ("CHECK".equals(e.getActionCommand())) {
-			boolean checkable = true;
+			boolean usable = true;
 			for (int x = 1; x < 5; x++) {
 				if (tempName[0][x].getBackground().equals(Color.WHITE)) {
 					System.out.println("Error");
-					checkable = false;
+				 usable = false;
 				}
 			}
-			if (checkable) {
-				order toCompare = new order(tempName[0][1].getBackground(), tempName[0][2].getBackground(),
+			if(usable) {
+				Order toCompare = new Order(tempName[0][1].getBackground(), tempName[0][2].getBackground(),
 						tempName[0][3].getBackground(), tempName[0][4].getBackground());
-				mastermind.getCon().compare(mastermind.getToGuess(), toCompare);
+				Mastermind.getCon().compare(Mastermind.getToGuess(), toCompare);
 				this.clearBoard();
 			}
 			selectedColumn = -1;
@@ -188,7 +182,7 @@ public class toGuess extends JFrame implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		toGuess gui = new toGuess();
+		ToGuess gui = new ToGuess();
 		gui.initializeBoard();
 
 	}

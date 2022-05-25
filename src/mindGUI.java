@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-public class mindGUI extends JFrame implements ActionListener {
+public class MindGUI extends JFrame implements ActionListener {
 
-	private drawingMindField drawnMind;
+	private DrawingMindField drawnMind;
 
 	private Color[] colors = { Color.red, Color.blue, Color.green, Color.yellow, Color.MAGENTA, Color.darkGray };
 	private ArrayList<String> colorsS = new ArrayList<String>();
@@ -20,7 +20,7 @@ public class mindGUI extends JFrame implements ActionListener {
 	
 
 	public void initializeMindBoard() {
-		drawnMind = new drawingMindField();
+		drawnMind = new DrawingMindField();
 
 		tempName = new JButton[2][6];
 		selectedColor = Color.WHITE;
@@ -109,12 +109,12 @@ public class mindGUI extends JFrame implements ActionListener {
 				}
 			}
 			if (checkable) {
-				order toCompare = new order(tempName[0][1].getBackground(), tempName[0][2].getBackground(),
+				Order toCompare = new Order(tempName[0][1].getBackground(), tempName[0][2].getBackground(),
 						tempName[0][3].getBackground(), tempName[0][4].getBackground());
-				drawnMind.paintOrder(mastermind.getRound(), toCompare);
-				drawnMind.paintPins(mastermind.getRound(),
-						mastermind.getCon().compare(mastermind.getToGuess(), toCompare));
-				mastermind.setRound(mastermind.getRound() + 1);
+				drawnMind.paintOrder(Mastermind.getRound(), toCompare);
+				drawnMind.paintPins(Mastermind.getRound(),
+						Mastermind.getCon().compare(Mastermind.getToGuess(), toCompare));
+				Mastermind.setRound(Mastermind.getRound() + 1);
 
 				this.clearBoard();
 			}

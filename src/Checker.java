@@ -1,12 +1,13 @@
 
-public class control {
+public class Checker {
     private int whitePins;
     private int blackPins;
 
-    public control() {
+
+    public Checker() {
     }
 
-    public pins compare(order sample, order toCompare) {
+    public Pins compare(Order sample, Order toCompare) {
         int[] workarraySample = { sample.getOrderArrayNumber(0), sample.getOrderArrayNumber(1),
                 sample.getOrderArrayNumber(2), sample.getOrderArrayNumber(3) };
         int[] workarray = toCompare.getOrderArray();
@@ -43,7 +44,7 @@ public class control {
         }
         System.out.println("White Pins = " + whitePins);
         System.out.println("Black Pins = " + blackPins);
-        return new pins(whitePins,blackPins);
+        return new Pins(whitePins,blackPins);
     }
 
     public int getWhitePins() {
