@@ -16,8 +16,6 @@ import javax.swing.plaf.DimensionUIResource;
 
 public class ToGuess extends JFrame implements ActionListener {
 
-	private final class MouseInputListenerImplementation implements MouseInputListener {
-	}
 
 	private Color[] colors = { Color.red, Color.blue, Color.green, Color.yellow, Color.MAGENTA, Color.darkGray };
 	private ArrayList<String> colorsS = new ArrayList<String>();
