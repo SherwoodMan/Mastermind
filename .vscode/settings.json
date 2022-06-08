@@ -1,6 +1,6 @@
 {
     "java.project.sourcePaths": [
         "src",
-        "RMI"
+        "Mastermind mit ServerClient/src"
     ]
 }
