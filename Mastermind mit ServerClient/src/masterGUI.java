@@ -1,19 +1,19 @@
+import ServerClient.MessageModel;
 import ServerClient.Server;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collection;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
 
-public class MasterGUI extends JFrame implements ActionListener {
+public class masterGUI extends JFrame implements ActionListener {
 
 
-	private DrawingMasterField drawnMaster;
+	private drawingMasterField drawnMaster;
 
 	private Color[] colors = { Color.BLACK, Color.WHITE };
 
@@ -27,13 +27,17 @@ public class MasterGUI extends JFrame implements ActionListener {
 
 	private Server server;
 	private boolean connected = false;
+	private boolean myTurn = false;
+
+	private final Color[] colorsValues = { Color.red, Color.blue, Color.green, Color.yellow, Color.MAGENTA, Color.darkGray };
+	private final String[] colorsNames = { "RED", "BLUE", "GREEN", "YELLOW", "MAGENTA", "DARK_GRAY" };
 
 	public void initializeMasterBoard() {
 
 		init_server();
 
         System.out.println("checking");
-		drawnMaster = new DrawingMasterField();
+		drawnMaster = new drawingMasterField();
 
 		tempName = new JButton[2][6];
 		selectedColor = Color.GRAY;
@@ -55,7 +59,7 @@ public class MasterGUI extends JFrame implements ActionListener {
 		tempName[0][0].addActionListener(this);
 		tempName[0][0].setBackground(Color.PINK);
 		tempName[0][0].setActionCommand("CLEAR");
-		tempName[0][0].setBounds(10, 340, 85, 30);
+		tempName[0][0].setBounds(10, 320, 85, 30);
 		frame.add(tempName[0][0]);
 
 		for (int y = 1; y < 5; y++) {
@@ -72,7 +76,7 @@ public class MasterGUI extends JFrame implements ActionListener {
 		tempName[0][5].addActionListener(this);
 		tempName[0][5].setBackground(Color.PINK);
 		tempName[0][5].setActionCommand("CHECK");
-		tempName[0][5].setBounds(105, 340, 85, 30);
+		tempName[0][5].setBounds(105, 320, 85, 30);
 		frame.add(tempName[0][5]);
 
 		for (int x = 0; x < 2; x++) {
@@ -122,10 +126,21 @@ public class MasterGUI extends JFrame implements ActionListener {
 			this.clearBoard();
 		}
 		if ("CHECK".equals(e.getActionCommand())) {
-			Pins toCompare = new Pins(tempName[0][1].getBackground(), tempName[0][2].getBackground(),
-					tempName[0][3].getBackground(), tempName[0][4].getBackground());
-			drawnMaster.paintPins(Mastermind.getRound(), toCompare);
-			Mastermind.setRound(Mastermind.getRound() + 1);
+
+			Color c1 = tempName[0][1].getBackground();
+			Color c2 = tempName[0][2].getBackground();
+			Color c3 = tempName[0][3].getBackground();
+			Color c4 = tempName[0][4].getBackground();
+
+			pins toCompare = new pins(c1, c2, c3, c4);
+			drawnMaster.paintPins(mastermind.getRound(), toCompare);
+			int round = mastermind.getRound();
+
+			MessageModel message = new MessageModel(round, c1, c2, c3, c4);
+			server.sendObject(message);
+			enableButtons(false);
+
+			mastermind.setRound(round + 1);
 			this.clearBoard();
 			selectedColumn = -1;
 			selectedColor = Color.WHITE;
@@ -148,18 +163,16 @@ public class MasterGUI extends JFrame implements ActionListener {
 		}
 	}
 
-	private void parseMessage(String message){
-		// todo
-		System.out.println(message);
-		if (message.equals("start")){
-			setConnected(true);
-		}
-		else if (message.equals("win")){
-			// Gewinnerermittlung
-		}
+	private void parseMessage(MessageModel message){
+		System.out.println(message.toString());
+		order o = new order(message.getColor1(), message.getColor2(), message.getColor3(), message.getColor4());
+		drawnMaster.paintOrder(message.getRound(), o);
+		// activate button to be able to send response to client
+		enableButtons(true);
 	}
+
 	// nicht nur Variable setzen sondern auch alle von dieser Variable abhängigen Komponenten darüber informieren,
-	// das diese Variable einen neuen Wert hat
+	// dass diese Variable einen neuen Wert hat
 	private void setConnected(boolean c){
 		this.connected = c;
 		enableButtons(c);
@@ -176,15 +189,5 @@ public class MasterGUI extends JFrame implements ActionListener {
 	}
 
 
+
 }
-/*
-message format:
-"
-    round=int,
-    type=boolean,
-    color1=string,
-    color2=string,
-    color3=string,
-    color4=string,
-"
-*/

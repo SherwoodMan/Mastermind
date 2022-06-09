@@ -16,17 +16,17 @@ public class order {
     public order(Color zeroC, Color oneC, Color twoC, Color threeC) {
         Color[] colorArray = { zeroC, oneC, twoC, threeC };
         for (int i = 0; i < colorArray.length; i++) {
-            if (colorArray[i] == Color.red) {
+            if (colorArray[i].equals(Color.red)) {
                 this.setOrderArrayNumber(i, 0);
-            } else if (colorArray[i] == Color.blue) {
+            } else if (colorArray[i].equals(Color.blue)) {
                 this.setOrderArrayNumber(i, 1);
-            } else if (colorArray[i] == Color.green) {
+            } else if (colorArray[i].equals(Color.green)) {
                 this.setOrderArrayNumber(i, 2);
-            } else if (colorArray[i] == Color.yellow) {
+            } else if (colorArray[i].equals(Color.yellow)) {
                 this.setOrderArrayNumber(i, 3);
-            } else if (colorArray[i] == Color.MAGENTA) {
+            } else if (colorArray[i].equals(Color.MAGENTA)) {
                 this.setOrderArrayNumber(i, 4);
-            } else if (colorArray[i] == Color.darkGray) {
+            } else if (colorArray[i].equals(Color.darkGray)) {
                 this.setOrderArrayNumber(i, 5);
             } else {
                 this.setOrderArrayNumber(i, -3);
@@ -123,5 +123,21 @@ public class order {
 
         return colorArray;
 
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof order)){
+            return false;
+        }
+        order toCompareOrder = (order)obj;
+        int [] toCompareList = toCompareOrder.getOrderArray();
+        for (int i = 0; i < toCompareList.length; i++){
+            if (toCompareList[i] != this.orderArray[i]){
+                return false;
+            }
+        }
+        return true;
     }
 }

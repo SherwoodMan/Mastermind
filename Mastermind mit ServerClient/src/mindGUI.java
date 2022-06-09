@@ -1,12 +1,12 @@
 import ServerClient.Client;
+import ServerClient.MessageModel;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.*;
 
 public class mindGUI extends JFrame implements ActionListener {
 
@@ -18,6 +18,8 @@ public class mindGUI extends JFrame implements ActionListener {
 	private JButton[][] tempName;
 	private Color selectedColor;
 	private int selectedColumn;
+
+	private JFrame frame;
 
 	private Client client;
 
@@ -40,7 +42,7 @@ public class mindGUI extends JFrame implements ActionListener {
 		for (String h : colorsNA) {
 			colorsN.add(h);
 		}
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 		frame.setSize(1200, 700);
 		frame.setLayout(null);
 
@@ -116,12 +118,22 @@ public class mindGUI extends JFrame implements ActionListener {
 				}
 			}
 			if (checkable) {
-				order toCompare = new order(tempName[0][1].getBackground(), tempName[0][2].getBackground(),
-						tempName[0][3].getBackground(), tempName[0][4].getBackground());
+
+				Color c1 = tempName[0][1].getBackground();
+				Color c2 = tempName[0][2].getBackground();
+				Color c3 = tempName[0][3].getBackground();
+				Color c4 = tempName[0][4].getBackground();
+
+				order toCompare = new order(c1, c2, c3, c4);
 				drawnMind.paintOrder(mastermind.getRound(), toCompare);
-				drawnMind.paintPins(mastermind.getRound(),
-						mastermind.getCon().compare(mastermind.getToGuess(), toCompare));
-				mastermind.setRound(mastermind.getRound() + 1);
+
+				int round = mastermind.getRound();
+				mastermind.setRound(round + 1);
+
+				MessageModel message = new MessageModel(round, c1, c2, c3, c4);
+				client.sendObject(message);
+				// deactivate all buttons after sending a message
+				enableButtons(false);
 
 				this.clearBoard();
 			}
@@ -130,13 +142,20 @@ public class mindGUI extends JFrame implements ActionListener {
 		}
 
 	}
+
+	private void enableButtons(boolean c){
+		for(JButton[] buttonsList : tempName){
+			for(JButton button : buttonsList){
+				if (button != null){
+					button.setEnabled(c);
+				}
+			}
+		}
+	}
 //dry: don't repeat yourself
 	private void init_client(){
 		if (client == null){
 			client = new Client();
-			client.setConnectionListener(()->{
-				client.sendMessage("start");
-			});
 			client.setListener(message -> {
 				parseMessage(message);
 			});
@@ -145,8 +164,54 @@ public class mindGUI extends JFrame implements ActionListener {
 			clientThread.start();
 		}
 	}
-	private void parseMessage(String message){
-		// todo
+	private void parseMessage(MessageModel message){
+		System.out.println(message.toString());
+		pins p = new pins(message.getColor1(), message.getColor2(), message.getColor3(),message.getColor4());
+		drawnMind.paintPins(message.getRound(), p);
+		//check winner
+		if (
+				message.getColor1().equals(Color.WHITE) &&
+				message.getColor2().equals(Color.WHITE) &&
+				message.getColor3().equals(Color.WHITE) &&
+				message.getColor4().equals(Color.WHITE)
+		){
+			win();
+		}else if (message.getRound() >= 11){
+			lose();
+			return;
+		}
+		enableButtons(true);
+	}
+
+	private void win(){
+		System.out.println("gewonnen");
+		clearFrame();
+		JLabel label = new JLabel("Win");
+		label.setFont(new Font(label.getFont().getName(), Font.PLAIN, 96));
+		label.setBounds(0, 0, frame.getWidth(), frame.getHeight());
+		frame.add(label);
+		frame.repaint();
+	}
+
+	private void clearFrame(){
+		for (JButton[] buttonsList : tempName){
+			for (JButton button : buttonsList){
+				if (button != null){
+					frame.remove(button);
+				}
+			}
+		}
+		frame.remove(drawnMind);
+	}
+
+	private void lose(){
+		System.out.println("verloren");
+		clearFrame();
+		JLabel label = new JLabel("Lose");
+		label.setFont(new Font(label.getFont().getName(), Font.PLAIN, 96));
+		label.setBounds(0, 0, frame.getWidth(), frame.getHeight());
+		frame.add(label);
+		frame.repaint();
 	}
 
 

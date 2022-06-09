@@ -128,7 +128,6 @@ public class drawingMasterField extends JPanel {
         for (int i = 0; i < colorOrderToChange.length; i++) {
             mastermind.getGuesses()[i][turn] = colorOrderToChange[i];
         }
-        
         repaint();
     }
 }

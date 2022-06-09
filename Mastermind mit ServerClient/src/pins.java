@@ -24,22 +24,22 @@ public class pins {
     }
 
     public pins(Color zeroC, Color oneC, Color twoC, Color threeC){
-        if (zeroC == Color.WHITE) {
+        if (zeroC.equals(Color.WHITE)) {
             this.whitePins ++;
         } else {
             this.blackPins ++;
         }
-        if (oneC == Color.WHITE) {
+        if (oneC.equals(Color.WHITE)) {
             this.whitePins ++;
         } else {
             this.blackPins ++;
         }
-        if (twoC == Color.WHITE) {
+        if (twoC.equals(Color.WHITE)) {
             this.whitePins ++;
         } else {
             this.blackPins ++;
         }
-        if (threeC == Color.WHITE) {
+        if (threeC.equals(Color.WHITE)) {
             this.whitePins ++;
         } else {
             this.blackPins ++;
