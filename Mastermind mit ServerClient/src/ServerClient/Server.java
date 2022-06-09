@@ -1,8 +1,6 @@
 package ServerClient;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -13,21 +11,27 @@ public class Server implements Runnable {
 
     private ReceivedMessageListener listener;
 
+    private ObjectOutputStream out;
+
     @Override
     public void run() {
         if (server == null) {
             try {
-                server = new ServerSocket(1500);
+                server = new ServerSocket(Constants.PORT);
                 client = server.accept();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-
+        try{
+            out = new ObjectOutputStream(client.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         try {
-            DataInputStream in = new DataInputStream(client.getInputStream());
+            ObjectInputStream in = new ObjectInputStream(client.getInputStream());
             while(true){
-                String message = in.readUTF();
+                MessageModel message =  (MessageModel) in.readObject();
                 handleReceivedMessage(message);
             }
         }catch (Exception e){
@@ -35,7 +39,7 @@ public class Server implements Runnable {
         }
     }
 
-    private void handleReceivedMessage(String message){
+    private void handleReceivedMessage(MessageModel message){
         System.out.println(message);
         if (listener != null){
             listener.onMessageReceived(message);
@@ -46,6 +50,15 @@ public class Server implements Runnable {
         try {
             DataOutputStream out = new DataOutputStream(client.getOutputStream());
             out.writeUTF(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendObject(Serializable message){
+        try {
+            out.reset();
+            out.writeObject(message);
         } catch (IOException e) {
             e.printStackTrace();
         }

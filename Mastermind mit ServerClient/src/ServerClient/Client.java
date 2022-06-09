@@ -1,8 +1,6 @@
 package ServerClient;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 
 public class Client implements Runnable {
@@ -11,9 +9,11 @@ public class Client implements Runnable {
     private ReceivedMessageListener listener;
     private OnConnectionListener connectionListener;
 
+    private ObjectOutputStream out;
+
     public void run() {
         try {
-            server = new Socket("localhost", 1500);
+            server = new Socket("localhost", Constants.PORT);
             if (connectionListener != null){
                 connectionListener.onConnection();
             }
@@ -21,10 +21,15 @@ public class Client implements Runnable {
             e.printStackTrace();
         }
         System.out.println("connected");
+        try {
+            out = new ObjectOutputStream(server.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         try{
-            DataInputStream in = new DataInputStream(server.getInputStream());
+            ObjectInputStream in = new ObjectInputStream(server.getInputStream());
             while(true){
-                String message = in.readUTF();
+                MessageModel message = (MessageModel) in.readObject();
                 handleReceivedMessage(message);
             }
         }catch (Exception e){
@@ -32,7 +37,7 @@ public class Client implements Runnable {
         }
     }
 
-    private void handleReceivedMessage(String message){
+    private void handleReceivedMessage(MessageModel message){
         if (listener != null){
             listener.onMessageReceived(message);
         }
@@ -42,6 +47,15 @@ public class Client implements Runnable {
         try {
             DataOutputStream out = new DataOutputStream(server.getOutputStream());
             out.writeUTF(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendObject(Serializable message){
+        try {
+            out.reset();
+            out.writeObject(message);
         } catch (IOException e) {
             e.printStackTrace();
         }
