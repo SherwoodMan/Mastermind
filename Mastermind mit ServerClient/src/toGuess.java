@@ -1,7 +1,7 @@
 
 import javax.swing.JFrame;
 
-public class toGuess {
+public class ToGuess {
 
     public static void main(String[] args) {
 

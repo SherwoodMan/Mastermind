@@ -10,10 +10,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 
-public class masterGUI extends JFrame implements ActionListener {
+public class MasterGUI extends JFrame implements ActionListener {
 
 
-	private drawingMasterField drawnMaster;
+	private DrawingMasterField drawnMaster;
 
 	private Color[] colors = { Color.BLACK, Color.WHITE };
 
@@ -37,7 +37,7 @@ public class masterGUI extends JFrame implements ActionListener {
 		init_server();
 
         System.out.println("checking");
-		drawnMaster = new drawingMasterField();
+		drawnMaster = new DrawingMasterField();
 
 		tempName = new JButton[2][6];
 		selectedColor = Color.GRAY;
@@ -132,15 +132,15 @@ public class masterGUI extends JFrame implements ActionListener {
 			Color c3 = tempName[0][3].getBackground();
 			Color c4 = tempName[0][4].getBackground();
 
-			pins toCompare = new pins(c1, c2, c3, c4);
-			drawnMaster.paintPins(mastermind.getRound(), toCompare);
-			int round = mastermind.getRound();
+			Pins toCompare = new Pins(c1, c2, c3, c4);
+			drawnMaster.paintPins(Mastermind.getRound(), toCompare);
+			int round = Mastermind.getRound();
 
 			MessageModel message = new MessageModel(round, c1, c2, c3, c4);
 			server.sendObject(message);
 			enableButtons(false);
 
-			mastermind.setRound(round + 1);
+			Mastermind.setRound(round + 1);
 			this.clearBoard();
 			selectedColumn = -1;
 			selectedColor = Color.WHITE;
@@ -165,7 +165,7 @@ public class masterGUI extends JFrame implements ActionListener {
 
 	private void parseMessage(MessageModel message){
 		System.out.println(message.toString());
-		order o = new order(message.getColor1(), message.getColor2(), message.getColor3(), message.getColor4());
+		Order o = new Order(message.getColor1(), message.getColor2(), message.getColor3(), message.getColor4());
 		drawnMaster.paintOrder(message.getRound(), o);
 		// activate button to be able to send response to client
 		enableButtons(true);

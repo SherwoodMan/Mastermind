@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-public class mindGUI extends JFrame implements ActionListener {
+public class MindGUI extends JFrame implements ActionListener {
 
-	private drawingMindField drawnMind;
+	private DrawingMindField drawnMind;
 
 	private Color[] colors = { Color.red, Color.blue, Color.green, Color.yellow, Color.MAGENTA, Color.darkGray };
 	private ArrayList<String> colorsS = new ArrayList<String>();
@@ -29,7 +29,7 @@ public class mindGUI extends JFrame implements ActionListener {
 
 		init_client();
 
-		drawnMind = new drawingMindField();
+		drawnMind = new DrawingMindField();
 
 		tempName = new JButton[2][6];
 		selectedColor = Color.WHITE;
@@ -124,11 +124,11 @@ public class mindGUI extends JFrame implements ActionListener {
 				Color c3 = tempName[0][3].getBackground();
 				Color c4 = tempName[0][4].getBackground();
 
-				order toCompare = new order(c1, c2, c3, c4);
-				drawnMind.paintOrder(mastermind.getRound(), toCompare);
+				Order toCompare = new Order(c1, c2, c3, c4);
+				drawnMind.paintOrder(Mastermind.getRound(), toCompare);
 
-				int round = mastermind.getRound();
-				mastermind.setRound(round + 1);
+				int round = Mastermind.getRound();
+				Mastermind.setRound(round + 1);
 
 				MessageModel message = new MessageModel(round, c1, c2, c3, c4);
 				client.sendObject(message);
@@ -166,7 +166,7 @@ public class mindGUI extends JFrame implements ActionListener {
 	}
 	private void parseMessage(MessageModel message){
 		System.out.println(message.toString());
-		pins p = new pins(message.getColor1(), message.getColor2(), message.getColor3(),message.getColor4());
+		Pins p = new Pins(message.getColor1(), message.getColor2(), message.getColor3(),message.getColor4());
 		drawnMind.paintPins(message.getRound(), p);
 		//check winner
 		if (

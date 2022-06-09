@@ -1,10 +1,10 @@
 
 import java.awt.Color;
 
-public class mastermind {
+public class Mastermind {
 
-    private static control con = new control();
-    private static order toGuess = new order();
+    private static Control con = new Control();
+    private static Order toGuess = new Order();
     private static Color[][] guesses = new Color[4][12];
     private static Color[][] reaction = new Color[4][12];
     private static int round;
@@ -13,7 +13,7 @@ public class mastermind {
         randomOrder(toGuess);
         System.out.println(toGuess.toString());
         greyingArray();
-        guiVersionTwo newgame = new guiVersionTwo();
+        MainGUI newgame = new MainGUI();
         newgame.initializeStart();
     }
     /*
@@ -24,7 +24,7 @@ public class mastermind {
     }
 
     public static void setRound(int round) {
-        mastermind.round = round;
+        Mastermind.round = round;
     }
 
     public static Color[][] getGuesses() {
@@ -32,7 +32,7 @@ public class mastermind {
     }
 
     public static void setGuesses(Color[][] guesses) {
-        mastermind.guesses = guesses;
+        Mastermind.guesses = guesses;
     }
 
     public static Color[][] getReaction() {
@@ -40,12 +40,12 @@ public class mastermind {
     }
 
     public static void setReaction(Color[][] reaction) {
-        mastermind.reaction = reaction;
+        Mastermind.reaction = reaction;
     }
 
     
 
-    public static order randomOrder(order randomOrder) {
+    public static Order randomOrder(Order randomOrder) {
         int zero, one, two, three;
 
         do {
@@ -85,11 +85,11 @@ public class mastermind {
         }
     }
 
-    public static order getToGuess() {
+    public static Order getToGuess() {
         return toGuess;
     }
 
-    public static control getCon() {
+    public static Control getCon() {
         return con;
     }
 }
