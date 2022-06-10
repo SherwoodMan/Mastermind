@@ -13,7 +13,8 @@ public class Client implements Runnable {
 
     public void run() {
         try {
-            server = new Socket("localhost", Constants.PORT);
+            // localhost = "127.0.0.1"
+            server = new Socket(Constants.IP_ADDRESS, Constants.PORT);
             if (connectionListener != null){
                 connectionListener.onConnection();
             }

@@ -1,4 +1,5 @@
 
+import javax.swing.*;
 import java.awt.Color;
 
 public class Mastermind {
