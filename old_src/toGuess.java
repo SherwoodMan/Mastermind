@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.event.MouseInputListener;
 import javax.swing.plaf.DimensionUIResource;
 
-public class ToGuess extends JFrame implements ActionListener {
+public class toGuess extends JFrame implements ActionListener {
 
 
 	private Color[] colors = { Color.red, Color.blue, Color.green, Color.yellow, Color.MAGENTA, Color.darkGray };
@@ -180,7 +180,7 @@ public class ToGuess extends JFrame implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		ToGuess gui = new ToGuess();
+		toGuess gui = new toGuess();
 		gui.initializeBoard();
 
 	}
