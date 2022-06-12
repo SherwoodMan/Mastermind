@@ -120,24 +120,6 @@ public class Order {
                 colorArray[i] = Color.darkGray;
             }
         }
-
         return colorArray;
-
-    }
-
-
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Order)){
-            return false;
-        }
-        Order toCompareOrder = (Order)obj;
-        int [] toCompareList = toCompareOrder.getOrderArray();
-        for (int i = 0; i < toCompareList.length; i++){
-            if (toCompareList[i] != this.orderArray[i]){
-                return false;
-            }
-        }
-        return true;
     }
 }

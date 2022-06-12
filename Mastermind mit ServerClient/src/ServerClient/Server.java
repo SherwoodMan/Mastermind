@@ -46,14 +46,6 @@ public class Server implements Runnable {
         }
     }
 
-    public void sendMessage(String message){
-        try {
-            DataOutputStream out = new DataOutputStream(client.getOutputStream());
-            out.writeUTF(message);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void sendObject(Serializable message){
         try {

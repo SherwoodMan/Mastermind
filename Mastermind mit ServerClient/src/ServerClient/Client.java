@@ -7,7 +7,6 @@ public class Client implements Runnable {
 
     private Socket server;
     private ReceivedMessageListener listener;
-    private OnConnectionListener connectionListener;
 
     private ObjectOutputStream out;
 
@@ -15,9 +14,6 @@ public class Client implements Runnable {
         try {
             // localhost = "127.0.0.1"
             server = new Socket(Constants.IP_ADDRESS, Constants.PORT);
-            if (connectionListener != null){
-                connectionListener.onConnection();
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,14 +40,6 @@ public class Client implements Runnable {
         }
     }
 
-    public void sendMessage(String message){
-        try {
-            DataOutputStream out = new DataOutputStream(server.getOutputStream());
-            out.writeUTF(message);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void sendObject(Serializable message){
         try {
@@ -66,9 +54,6 @@ public class Client implements Runnable {
         this.listener = listener;
     }
 
-    public void setConnectionListener(OnConnectionListener connectionListener){
-        this.connectionListener = connectionListener;
-    }
 
 }
 

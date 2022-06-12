@@ -178,6 +178,10 @@ public class MasterGUI extends JFrame implements ActionListener {
 		enableButtons(c);
 	}
 
+	/*
+	* message: "int round,String color1, String color2..."
+	* */
+
 	private void enableButtons(boolean c){
 		for(JButton[] buttonsList : tempName){
 			for(JButton button : buttonsList){

@@ -16,7 +16,7 @@ public class MainGUI{
 		box.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		ImageIcon logo = new ImageIcon(
-				new ImageIcon("Mastermind_logo.png").getImage().getScaledInstance(420, 320, Image.SCALE_DEFAULT));
+				new ImageIcon("Mastermind_logo.png").getImage().getScaledInstance(400, 320, Image.SCALE_DEFAULT));
 		Object[] options = { "Spieler 1", "Spieler 2" };
 		int n = JOptionPane.showOptionDialog(box, "Welcher Spieler bist du?", "Mastermind",
 				JOptionPane.YES_OPTION, JOptionPane.NO_OPTION, logo, options, options[0]);

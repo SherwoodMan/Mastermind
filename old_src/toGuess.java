@@ -94,7 +94,7 @@ public class ToGuess extends JFrame implements ActionListener {
 				hilfeFenster.setVisible(true);
 
 				JLabel hilfeText = new JLabel(
-						"<html>Code-Setzer:<BR>Der Code-Setzer gewinnt eine Runde,<BR> wenn es dem Code-Knacker nicht gelingt,<BR> den Code zu entschlüsseln.</html>");
+						"<html>Twinkle, twinkle, little star,<BR>How I wonder what you are.<BR>Up above the world so high,<BR>Like a diamond in the sky.</html>");
 				hilfeFenster.add(hilfeText);
 
 			}
