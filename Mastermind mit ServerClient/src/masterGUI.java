@@ -53,7 +53,7 @@ public class MasterGUI extends JFrame implements ActionListener {
 
 		tempName[0][0] = new JButton("CLEAR");
 		tempName[0][0].addActionListener(this);
-		tempName[0][0].setBackground(Color.PINK);
+		tempName[0][0].setBackground(Color.ORANGE);
 		tempName[0][0].setActionCommand("CLEAR");
 		tempName[0][0].setBounds(10, 320, 85, 30);
 		frame.add(tempName[0][0]);
@@ -70,7 +70,7 @@ public class MasterGUI extends JFrame implements ActionListener {
 
 		tempName[0][5] = new JButton("CHECK");
 		tempName[0][5].addActionListener(this);
-		tempName[0][5].setBackground(Color.PINK);
+		tempName[0][5].setBackground(Color.ORANGE);
 		tempName[0][5].setActionCommand("CHECK");
 		tempName[0][5].setBounds(105, 320, 85, 30);
 		frame.add(tempName[0][5]);
