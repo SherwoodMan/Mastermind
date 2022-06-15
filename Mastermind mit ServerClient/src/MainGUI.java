@@ -17,15 +17,14 @@ public class MainGUI{
 
 		ImageIcon logo = new ImageIcon(
 				new ImageIcon("Mastermind_logo.png").getImage().getScaledInstance(400, 320, Image.SCALE_DEFAULT));
-		Object[] options = { "Spieler 1", "Spieler 2" };
+		Object[] options = { "Master", "Mind" };
 		int n = JOptionPane.showOptionDialog(box, "Welcher Spieler bist du?", "Mastermind",
 				JOptionPane.YES_OPTION, JOptionPane.NO_OPTION, logo, options, options[0]);
 
-
 		box.dispose();
+
 		if (n == JOptionPane.YES_OPTION) {
-			masterGui = new MasterGUI();
-			masterGui.initializeMasterBoard();
+			chooseToGuessColors();
 		} else if (n == JOptionPane.NO_OPTION) {
 			mindGui = new MindGUI();
 			mindGui.initializeMindBoard();
@@ -42,6 +41,18 @@ public class MainGUI{
 		JOptionPane.showMessageDialog(null, "Dein Mitspieler ist nun an der Reihe.", "Spielerwechselerinnerung",
 				JOptionPane.OK_OPTION);
 	}
+
+	private void chooseToGuessColors(){
+		ToGuess guessGui = new ToGuess();
+		guessGui.setToGuessListener(order -> {
+			System.out.println("MainGui, guessguiListener: " + order.toString());
+			Mastermind.setToGuess(order);
+			masterGui = new MasterGUI();
+			masterGui.initializeMasterBoard();
+		});
+		guessGui.initializeBoard();
+	}
+
 
 
 }

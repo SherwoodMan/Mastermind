@@ -4,6 +4,7 @@ import java.awt.Color;
 
 public class Mastermind {
 
+
     private static Control con = new Control();
     private static Order toGuess = new Order();
     private static Color[][] guesses = new Color[4][12];
@@ -88,6 +89,10 @@ public class Mastermind {
 
     public static Order getToGuess() {
         return toGuess;
+    }
+
+    public static void setToGuess(Order order){
+        toGuess = order;
     }
 
     public static Control getCon() {

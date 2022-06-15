@@ -1,4 +1,5 @@
 import ServerClient.MessageModel;
+import ServerClient.ReceivedMessageListener;
 import ServerClient.Server;
 
 import java.awt.Color;
@@ -26,9 +27,14 @@ public class MasterGUI extends JFrame implements ActionListener {
 	private int selectedColumn;
 
 	private Server server;
-	
+	private boolean connected = false;
+	private boolean myTurn = false;
+
+	private final Color[] colorsValues = { Color.red, Color.blue, Color.green, Color.yellow, Color.MAGENTA, Color.darkGray };
+	private final String[] colorsNames = { "RED", "BLUE", "GREEN", "YELLOW", "MAGENTA", "DARK_GRAY" };
 
 	public void initializeMasterBoard() {
+
 
 		init_server();
 
@@ -109,7 +115,7 @@ public class MasterGUI extends JFrame implements ActionListener {
 		if (colorsS.contains(e.getActionCommand())) {
 			selectedColor = colors[colorsS.indexOf(e.getActionCommand())];
 		} else if (colorsN.contains(e.getActionCommand())) {
-			Integer i = Integer.valueOf(e.getActionCommand());
+			Integer i = new Integer(e.getActionCommand());
 			selectedColumn = i.intValue();
 		}
 		if (selectedColumn != -1 && !(selectedColor.equals(Color.GRAY))) {
@@ -149,9 +155,7 @@ public class MasterGUI extends JFrame implements ActionListener {
 		if (server == null){
 			server = new Server();
 
-			server.setListener(message-> {
-				parseMessage(message);
-			});
+			server.setListener(message -> parseMessage(message));
 
 			Thread serverThread = new Thread(server);
 			serverThread.setDaemon(true);
@@ -165,6 +169,13 @@ public class MasterGUI extends JFrame implements ActionListener {
 		drawnMaster.paintOrder(message.getRound(), o);
 		// activate button to be able to send response to client
 		enableButtons(true);
+	}
+
+	// nicht nur Variable setzen sondern auch alle von dieser Variable abhängigen Komponenten darüber informieren,
+	// dass diese Variable einen neuen Wert hat
+	private void setConnected(boolean c){
+		this.connected = c;
+		enableButtons(c);
 	}
 
 	/*
@@ -184,3 +195,4 @@ public class MasterGUI extends JFrame implements ActionListener {
 
 
 }
+
