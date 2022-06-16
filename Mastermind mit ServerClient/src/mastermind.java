@@ -3,8 +3,6 @@ import javax.swing.*;
 import java.awt.Color;
 
 public class Mastermind {
-
-
     private static Control con = new Control();
     private static Order toGuess = new Order();
     private static Color[][] guesses = new Color[4][12];
