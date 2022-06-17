@@ -45,25 +45,25 @@ public class DrawingMindField extends JPanel {
         g2d.setColor(Color.GRAY);
         int x = 25 + staticX;
         int y = 20 + staticY;
-        for (int i = 0; i < Mastermind.getGuesses()[1].length; i++) {
-            for (int j = 0; j < Mastermind.getGuesses().length; j++) {
+        for (int i = 0; i < Mastermind.guesses[1].length; i++) {
+            for (int j = 0; j < Mastermind.guesses.length; j++) {
 
-                g2d.setColor(Mastermind.getGuesses()[j][i]);
+                g2d.setColor(Mastermind.guesses[j][i]);
                 g2d.fill(new Ellipse2D.Double(x + i * 60, y + j * 50, 25, 25));
                 g2d.setColor(Color.GRAY);
 
             }
         }
         y = 220 + staticY;
-        for (int i = 0; i < Mastermind.getReaction()[1].length; i++) {
+        for (int i = 0; i < Mastermind.reaction[1].length; i++) {
 
-            g2d.setColor(Mastermind.getReaction()[0][i]);
+            g2d.setColor(Mastermind.reaction[0][i]);
             g2d.fill(new Ellipse2D.Double(i * 60 + x, y, 10, 10));
-            g2d.setColor(Mastermind.getReaction()[1][i]);
+            g2d.setColor(Mastermind.reaction[1][i]);
             g2d.fill(new Ellipse2D.Double(i * 60 + x + 15, y, 10, 10));
-            g2d.setColor(Mastermind.getReaction()[2][i]);
+            g2d.setColor(Mastermind.reaction[2][i]);
             g2d.fill(new Ellipse2D.Double(i * 60 + x, y + 15, 10, 10));
-            g2d.setColor(Mastermind.getReaction()[3][i]);
+            g2d.setColor(Mastermind.reaction[3][i]);
             g2d.fill(new Ellipse2D.Double(i * 60 + x + 15, y + 15, 10, 10));
             g2d.setColor(Color.GRAY);
         }
@@ -75,49 +75,49 @@ public class DrawingMindField extends JPanel {
         int blackPins = pinObject.getBlackPins();
         int whitePins = pinObject.getWhitePins();
         if (whitePins > 0) {
-            Mastermind.getReaction()[0][turn] = Color.WHITE;
+            Mastermind.reaction[0][turn] = Color.WHITE;
             whitePins--;
             if (whitePins > 0) {
-                Mastermind.getReaction()[1][turn] = Color.WHITE;
+                Mastermind.reaction[1][turn] = Color.WHITE;
                 whitePins--;
                 if (whitePins > 0) {
-                    Mastermind.getReaction()[2][turn] = Color.WHITE;
+                    Mastermind.reaction[2][turn] = Color.WHITE;
                     whitePins--;
                     if (whitePins > 0) {
-                        Mastermind.getReaction()[3][turn] = Color.WHITE;
+                        Mastermind.reaction[3][turn] = Color.WHITE;
                     } else if (blackPins > 0) {
-                        Mastermind.getReaction()[3][turn] = Color.BLACK;
+                        Mastermind.reaction[3][turn] = Color.BLACK;
                     }
                 } else if (blackPins > 0) {
-                    Mastermind.getReaction()[2][turn] = Color.BLACK;
+                    Mastermind.reaction[2][turn] = Color.BLACK;
                     blackPins--;
                     if (blackPins > 0) {
-                        Mastermind.getReaction()[3][turn] = Color.BLACK;
+                        Mastermind.reaction[3][turn] = Color.BLACK;
                     }
                 }
             } else if (blackPins > 0) {
-                Mastermind.getReaction()[1][turn] = Color.BLACK;
+                Mastermind.reaction[1][turn] = Color.BLACK;
                 blackPins--;
                 if (blackPins > 0) {
-                    Mastermind.getReaction()[2][turn] = Color.BLACK;
+                    Mastermind.reaction[2][turn] = Color.BLACK;
                     blackPins--;
                     if (blackPins > 0) {
-                        Mastermind.getReaction()[3][turn] = Color.BLACK;
+                        Mastermind.reaction[3][turn] = Color.BLACK;
                     }
 
                 }
             }
         } else if (blackPins > 0) {
-            Mastermind.getReaction()[0][turn] = Color.BLACK;
+            Mastermind.reaction[0][turn] = Color.BLACK;
             blackPins--;
             if (blackPins > 0) {
-                Mastermind.getReaction()[1][turn] = Color.BLACK;
+                Mastermind.reaction[1][turn] = Color.BLACK;
                 blackPins--;
                 if (blackPins > 0) {
-                    Mastermind.getReaction()[2][turn] = Color.BLACK;
+                    Mastermind.reaction[2][turn] = Color.BLACK;
                     blackPins--;
                     if (blackPins > 0) {
-                        Mastermind.getReaction()[3][turn] = Color.BLACK;
+                        Mastermind.reaction[3][turn] = Color.BLACK;
                     }
 
                 }
@@ -129,7 +129,7 @@ public class DrawingMindField extends JPanel {
     public void paintOrder( int turn, Order orderToChange){
         Color[] colorOrderToChange = orderToChange.orderInColor();
         for (int i = 0; i < colorOrderToChange.length; i++) {
-            Mastermind.getGuesses()[i][turn] = colorOrderToChange[i];
+            Mastermind.guesses[i][turn] = colorOrderToChange[i];
         }
         
         repaint();

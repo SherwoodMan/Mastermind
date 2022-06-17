@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 
 public class MessageModel implements Serializable {
-    private int round;
+    public int round;
     private Color color1;
     private Color color2;
     private Color color3;

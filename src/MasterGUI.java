@@ -135,14 +135,15 @@ public class MasterGUI extends JFrame implements ActionListener {
 			Color c4 = tempName[0][4].getBackground();
 
 			Pins toCompare = new Pins(c1, c2, c3, c4);
-			drawnMaster.paintPins(Mastermind.getRound(), toCompare);
-			int round = Mastermind.getRound();
+			drawnMaster.paintPins(Mastermind.round, toCompare);
+			int round = Mastermind.round;
 
 			MessageModel message = new MessageModel(round, c1, c2, c3, c4);
 			server.sendObject(message);
 			enableButtons(false);
+			Mastermind.mainGui.showTurnChange();
 
-			Mastermind.setRound(round + 1);
+			Mastermind.round = round + 1;
 			this.clearBoard();
 			selectedColumn = -1;
 			selectedColor = Color.WHITE;
@@ -166,9 +167,10 @@ public class MasterGUI extends JFrame implements ActionListener {
 	private void parseMessage(MessageModel message){
 		System.out.println(message.toString());
 		Order o = new Order(message.getColor1(), message.getColor2(), message.getColor3(), message.getColor4());
-		drawnMaster.paintOrder(message.getRound(), o);
+		drawnMaster.paintOrder(message.round, o);
 		// activate button to be able to send response to client
 		enableButtons(true);
+		Mastermind.mainGui.showTurn();
 	}
 
 	// nicht nur Variable setzen sondern auch alle von dieser Variable abhängigen Komponenten darüber informieren,

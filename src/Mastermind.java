@@ -5,42 +5,17 @@ import java.awt.Color;
 public class Mastermind {
     private static Control con = new Control();
     private static Order toGuess = new Order();
-    private static Color[][] guesses = new Color[4][12];
-    private static Color[][] reaction = new Color[4][12];
-    private static int round;
+    static Color[][] guesses = new Color[4][12];
+    static Color[][] reaction = new Color[4][12];
+    static MainGUI mainGui = new MainGUI();
+    static int round;
 
     public static void main(String[] args) {
         randomOrder(toGuess);
         System.out.println(toGuess.toString());
         greyingArray();
-        MainGUI newgame = new MainGUI();
-        newgame.initializeStart();
-    }
-    /*
-        > man braucht für statische Klassen keine getters und setters 
-    */
-    public static int getRound() {
-        return round;
-    }
-
-    public static void setRound(int round) {
-        Mastermind.round = round;
-    }
-
-    public static Color[][] getGuesses() {
-        return guesses;
-    }
-
-    public static void setGuesses(Color[][] guesses) {
-        Mastermind.guesses = guesses;
-    }
-
-    public static Color[][] getReaction() {
-        return reaction;
-    }
-
-    public static void setReaction(Color[][] reaction) {
-        Mastermind.reaction = reaction;
+        
+        mainGui.initializeStart();
     }
 
     

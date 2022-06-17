@@ -114,7 +114,7 @@ public class MindGUI extends JFrame implements ActionListener {
 			for (int x = 1; x < 5; x++) {
 				if (tempName[0][x].getBackground().equals(Color.WHITE)) {
 					System.out.println("Error");
-					
+					Mastermind.mainGui.missingColorAlert();
 					checkable = false;
 				}
 			}
@@ -126,15 +126,16 @@ public class MindGUI extends JFrame implements ActionListener {
 				Color c4 = tempName[0][4].getBackground();
 
 				Order toCompare = new Order(c1, c2, c3, c4);
-				drawnMind.paintOrder(Mastermind.getRound(), toCompare);
+				drawnMind.paintOrder(Mastermind.round, toCompare);
 
-				int round = Mastermind.getRound();
-				Mastermind.setRound(round + 1);
+				int round = Mastermind.round;
+				Mastermind.round = round + 1;
 
 				MessageModel message = new MessageModel(round, c1, c2, c3, c4);
 				client.sendObject(message);
 				// deactivate all buttons after sending a message
 				enableButtons(false);
+				Mastermind.mainGui.showTurnChange();
 
 				this.clearBoard();
 			}
@@ -165,10 +166,11 @@ public class MindGUI extends JFrame implements ActionListener {
 			clientThread.start();
 		}
 	}
+
 	private void parseMessage(MessageModel message){
 		System.out.println(message.toString());
 		Pins p = new Pins(message.getColor1(), message.getColor2(), message.getColor3(),message.getColor4());
-		drawnMind.paintPins(message.getRound(), p);
+		drawnMind.paintPins(message.round, p);
 		//check winner
 		if (
 				message.getColor1().equals(Color.WHITE) &&
@@ -177,11 +179,12 @@ public class MindGUI extends JFrame implements ActionListener {
 				message.getColor4().equals(Color.WHITE)
 		){
 			win();
-		}else if (message.getRound() >= 11){
+		}else if (message.round >= 11){
 			lose();
 			return;
 		}
 		enableButtons(true);
+		Mastermind.mainGui.showTurn();
 	}
 
 	private void win(){
