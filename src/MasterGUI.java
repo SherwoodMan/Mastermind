@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 
 public class MasterGUI extends JFrame implements ActionListener {
 
-
+	private JFrame frame;
 	private DrawingMasterField drawnMaster;
 
 	private Color[] colors = { Color.BLACK, Color.WHITE };
@@ -53,7 +53,7 @@ public class MasterGUI extends JFrame implements ActionListener {
 		for (String h : colorsNA) {
 			colorsN.add(h);
 		}
-		JFrame frame = new JFrame("MASTERmind");
+		frame = new JFrame("MASTERmind");
 		frame.setSize(1200, 500);
 		frame.setLayout(null);
 
@@ -141,7 +141,7 @@ public class MasterGUI extends JFrame implements ActionListener {
 			MessageModel message = new MessageModel(round, c1, c2, c3, c4);
 			server.sendObject(message);
 			enableButtons(false);
-			Mastermind.mainGui.showTurnChange();
+			Mastermind.mainGui.showTurnChange(frame);
 
 			Mastermind.round = round + 1;
 			this.clearBoard();
@@ -170,7 +170,7 @@ public class MasterGUI extends JFrame implements ActionListener {
 		drawnMaster.paintOrder(message.round, o);
 		// activate button to be able to send response to client
 		enableButtons(true);
-		Mastermind.mainGui.showTurn();
+		Mastermind.mainGui.showTurn(frame);
 	}
 
 	// nicht nur Variable setzen sondern auch alle von dieser Variable abhängigen Komponenten darüber informieren,

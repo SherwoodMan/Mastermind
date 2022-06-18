@@ -129,7 +129,7 @@ public class ToGuess implements ActionListener {
 			for (int x = 1; x < 5; x++) {
 				if (tempName[0][x].getBackground().equals(Color.WHITE)) {
 					System.out.println("Error");
-					Mastermind.mainGui.missingColorAlert();
+					Mastermind.mainGui.missingColorAlert(frame);
 					return;
 				}
 			}

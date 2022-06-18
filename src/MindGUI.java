@@ -114,7 +114,7 @@ public class MindGUI extends JFrame implements ActionListener {
 			for (int x = 1; x < 5; x++) {
 				if (tempName[0][x].getBackground().equals(Color.WHITE)) {
 					System.out.println("Error");
-					Mastermind.mainGui.missingColorAlert();
+					Mastermind.mainGui.missingColorAlert(frame);
 					checkable = false;
 				}
 			}
@@ -135,7 +135,7 @@ public class MindGUI extends JFrame implements ActionListener {
 				client.sendObject(message);
 				// deactivate all buttons after sending a message
 				enableButtons(false);
-				Mastermind.mainGui.showTurnChange();
+				Mastermind.mainGui.showTurnChange(frame);
 
 				this.clearBoard();
 			}
@@ -184,7 +184,7 @@ public class MindGUI extends JFrame implements ActionListener {
 			return;
 		}
 		enableButtons(true);
-		Mastermind.mainGui.showTurn();
+		Mastermind.mainGui.showTurn(frame);
 	}
 
 	private void win(){

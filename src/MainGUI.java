@@ -1,4 +1,5 @@
 import java.awt.Image;
+import java.awt.Component;
 import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
@@ -9,6 +10,7 @@ import javax.swing.JOptionPane;
 public class MainGUI{
 	private MindGUI mindGui;
 	private MasterGUI masterGui;
+	
 
 	public void initializeStart() {
 		//JFrame erstellt als Variable
@@ -31,20 +33,17 @@ public class MainGUI{
 		}
 	}
 
-	public void showTurn() {
-		new JOptionPane();
-		JOptionPane.showMessageDialog(null, "Du bist jetzt an der Reihe.", "Spielerinnerung", JOptionPane.OK_OPTION);
+	public void showTurn(Component c) {
+		JOptionPane.showMessageDialog(c, "Du bist jetzt an der Reihe.", "Spielerinnerung", JOptionPane.OK_OPTION);
 	}
 
-	public void showTurnChange() {
-		new JOptionPane();
-		JOptionPane.showMessageDialog(null, "Dein Mitspieler ist nun an der Reihe.", "Spielerwechselerinnerung",
+	public void showTurnChange(Component c) {
+		JOptionPane.showMessageDialog(c, "Dein Mitspieler ist nun an der Reihe.", "Spielerwechselerinnerung",
 				JOptionPane.OK_OPTION);
 	}
 
-	public void missingColorAlert() {
-		new JOptionPane();
-		JOptionPane.showMessageDialog(null, "Bitte wähle 4 Farben aus.", "Missing Color Alert",
+	public void missingColorAlert(Component c) {
+		JOptionPane.showMessageDialog(c, "Bitte wähle 4 Farben aus.", "Missing Color Alert",
 				JOptionPane.OK_OPTION);
 	}
 
