@@ -141,7 +141,10 @@ public class MasterGUI extends JFrame implements ActionListener {
 			MessageModel message = new MessageModel(round, c1, c2, c3, c4);
 			server.sendObject(message);
 			enableButtons(false);
-			Mastermind.mainGui.showTurnChange(frame);
+
+			if(round< 11 && !((c1.equals(Color.WHITE)) && (c2.equals(Color.WHITE)) && (c3.equals(Color.WHITE)) && (c4.equals(Color.WHITE))) ){
+				Mastermind.mainGui.showTurnChange(frame);
+			}
 
 			Mastermind.round = round + 1;
 			this.clearBoard();

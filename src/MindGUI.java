@@ -179,6 +179,7 @@ public class MindGUI extends JFrame implements ActionListener {
 				message.getColor4().equals(Color.WHITE)
 		){
 			win();
+			return;
 		}else if (message.round >= 11){
 			lose();
 			return;
