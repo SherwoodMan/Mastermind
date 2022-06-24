@@ -1,4 +1,8 @@
-
+/*
+ * Diese Klasse war gedacht um automatisch zu Kontrollieren ob das geratene richtig ist
+ * Sie funktioniert, in Sonderfällen (bei doppelten Pins) kann es nur zu komischen ERgebnissen kommen
+ * Könnte für ein Spiel gegen eine AI genutzt werden
+ */
 public class Control {
     private int whitePins;
     private int blackPins;
@@ -65,8 +69,6 @@ public class Control {
     public boolean doubledPins(int[] sample, int pin) {
         for (int index = 0; index < sample.length; index++) {
             if (sample[index] == pin) {
-                // System.out.println(pin + " ist doppelt eingegeben worden, obwohl ein Spiel
-                // ohne Dopplung ausgewählt wurde");
                 return true;
             }
         }

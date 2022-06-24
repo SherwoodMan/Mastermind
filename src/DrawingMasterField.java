@@ -7,7 +7,9 @@ import java.awt.geom.Rectangle2D;
 import java.awt.BasicStroke;
 
 import javax.swing.JPanel;
-
+/*
+ * Diese Klasse 
+ */
 public class DrawingMasterField extends JPanel {
 
     private int staticX = 0;
