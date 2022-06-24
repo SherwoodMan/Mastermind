@@ -188,13 +188,97 @@ public class MindGUI extends JFrame implements ActionListener {
 		Mastermind.mainGui.showTurn(frame);
 	}
 
-	private void win(){
+		private void win() {
 		System.out.println("gewonnen");
 		clearFrame();
-		JLabel label = new JLabel("Win");
-		label.setFont(new Font(label.getFont().getName(), Font.PLAIN, 96));
+
+		JLabel label = new JLabel("<html><body>Du hast gewonnen!<br>Herzlichen Glückwunsch!</body></html>");
+		label.setFont(new Font(label.getFont().getName(), Font.BOLD, 42));
+		label.setForeground(Color.blue);
 		label.setBounds(0, 0, frame.getWidth(), frame.getHeight());
-		frame.add(label);
+		frame.setTitle("Du hast gewonnen!");
+
+		frame.setLayout(new BorderLayout());
+		JPanel panel0 = new JPanel();
+		JPanel panel1 = new JPanel();
+		panel1.add(label);
+
+		JButton spieleButton = new JButton("noch einmal spielen?");
+		panel0.add(spieleButton);
+		spieleButton.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(java.awt.event.MouseEvent e) {
+				// Spiel neu beginnen, Aufruf von Main und server
+
+			}
+
+			@Override
+			public void mousePressed(java.awt.event.MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseReleased(java.awt.event.MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(java.awt.event.MouseEvent e) {
+				spieleButton.setToolTipText("Viel Glück!");
+
+			}
+
+			@Override
+			public void mouseExited(java.awt.event.MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+		}
+
+		);
+
+		JButton beendeButton = new JButton("Beenden");
+		panel0.add(beendeButton);
+		beendeButton.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(java.awt.event.MouseEvent e) {
+				System.exit(0);
+
+			}
+
+			@Override
+			public void mousePressed(java.awt.event.MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseReleased(java.awt.event.MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(java.awt.event.MouseEvent e) {
+
+			}
+
+			@Override
+			public void mouseExited(java.awt.event.MouseEvent e) {
+				spieleButton.setToolTipText("Schade!");
+
+			}
+
+		});
+
+		frame.add(panel0, BorderLayout.PAGE_END);
+		frame.add(panel1, BorderLayout.PAGE_START);
+		// frame.add(label);
 		frame.repaint();
 	}
 
