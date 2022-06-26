@@ -1,5 +1,4 @@
 import ServerClient.MessageModel;
-import ServerClient.ReceivedMessageListener;
 import ServerClient.Server;
 
 import java.awt.Color;

@@ -6,14 +6,21 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-// MainGUI klasse muss nicht die Klasse JFrame erweitern, wenn JFrame als Variable erstellt wird.
+
+/*
+ * Diese Klasse kümmert sich um alle Spielerunspezifischen Oberflächenelemente 
+ */
+
 public class MainGUI{
 	private MindGUI mindGui;
 	private MasterGUI masterGui;
 	
 
+	/*
+	 * Diese Methode erstellt das Beginnfenster
+	 */
+
 	public void initializeStart() {
-		//JFrame erstellt als Variable
 		JFrame box = new JFrame();
 		box.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -33,19 +40,39 @@ public class MainGUI{
 		}
 	}
 
+
+	/*
+	 * Diese Methode bewirkt ein einfaches Dialogfenster zur Spielerinnerung
+	 */
+
 	public void showTurn(Component c) {
 		JOptionPane.showMessageDialog(c, "Du bist jetzt an der Reihe.", "Spielerinnerung", JOptionPane.OK_OPTION);
 	}
+
+
+	/*
+	 * Diese Methode bewirkt ein einfaches Dialogfenster zur Spielerwechselerinnerung
+	 */
 
 	public void showTurnChange(Component c) {
 		JOptionPane.showMessageDialog(c, "Dein Mitspieler ist nun an der Reihe.", "Spielerwechselerinnerung",
 				JOptionPane.OK_OPTION);
 	}
 
+
+	/*
+	 * Diese Methode bewirkt ein einfaches Dialogfenster zu fehlenden Farben beim absenden einer Farbreihenfolge
+	 */
+
 	public void missingColorAlert(Component c) {
 		JOptionPane.showMessageDialog(c, "Bitte wähle 4 Farben aus.", "Missing Color Alert",
 				JOptionPane.OK_OPTION);
 	}
+
+
+	/*
+	 * Diese Methode bewirkt ein Fenster zur Auswahl der Farbreihenfolge
+	 */
 
 	private void chooseToGuessColors(){
 		ToGuess guessGui = new ToGuess();

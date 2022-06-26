@@ -7,9 +7,7 @@ public class Control {
     private int whitePins;
     private int blackPins;
 
-    public Control() {
-    }
-
+    
     public Pins compare(Order sample, Order toCompare) {
         int[] workarraySample = { sample.getOrderArrayNumber(0), sample.getOrderArrayNumber(1),
                 sample.getOrderArrayNumber(2), sample.getOrderArrayNumber(3) };

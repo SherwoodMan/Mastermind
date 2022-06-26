@@ -1,4 +1,3 @@
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -8,12 +7,25 @@ import java.awt.BasicStroke;
 
 import javax.swing.JPanel;
 
+
+/*
+ * Diese Klasse bearbeitet das Spielfeld für die "Mind" - Oberfläche
+ */
+
 public class DrawingMindField extends JPanel {
+
+
+    /*
+     * Das Feld ist an diese beidem Attribute gebunden, damit man es einfach verschieben kann
+     */
 
     private int staticX = 0;
     private int staticY = 20;
 
 
+    /*
+     * Diese Methode malt nach und nach das Spielfeld
+     */
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -70,6 +82,9 @@ public class DrawingMindField extends JPanel {
     }
 
     
+    /*
+     * Diese Methode kümmert sich um das Platzieren der Kontrollstifte
+     */
 
     public void paintPins(int turn, Pins pinObject) {
         int blackPins = pinObject.getBlackPins();
@@ -125,6 +140,10 @@ public class DrawingMindField extends JPanel {
         }
         repaint();
     }
+
+    /*
+     * Diese Methode kümmert sich um das Platzieren der Farbstifte
+     */
 
     public void paintOrder( int turn, Order orderToChange){
         Color[] colorOrderToChange = orderToChange.orderInColor();
