@@ -1,11 +1,15 @@
-import javax.swing.*;
-import javax.swing.plaf.DimensionUIResource;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.plaf.DimensionUIResource;
 
 public class ToGuess implements ActionListener {
 
@@ -78,7 +82,6 @@ public class ToGuess implements ActionListener {
 		}
 		JButton hilfe = new JButton("?");
 		panel2.add(hilfe);
-		// addActionListener eignet sich besser, um button-clicks zu implementieren
 		hilfe.addActionListener(e-> {
 				JFrame hilfeFenster = new JFrame();
 				hilfeFenster.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
