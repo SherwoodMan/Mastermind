@@ -24,8 +24,6 @@ public class MindGUI extends JFrame implements ActionListener {
 
 	private Client client;
 
-	
-
 	public void initializeMindBoard() {
 
 		init_client();
@@ -59,7 +57,7 @@ public class MindGUI extends JFrame implements ActionListener {
 			tempName[0][y].addActionListener(this);
 			tempName[0][y].setBackground(Color.WHITE);
 			tempName[0][y].setActionCommand("" + y);
-			tempName[0][y].setBounds(10, 90+ y*50, 180, 25);
+			tempName[0][y].setBounds(10, 90 + y * 50, 180, 25);
 			frame.add(tempName[0][y]);
 		}
 
@@ -75,7 +73,7 @@ public class MindGUI extends JFrame implements ActionListener {
 			tempName[1][x].addActionListener(this);
 			tempName[1][x].setBackground(colors[x]);
 			tempName[1][x].setActionCommand(colorsS.get(x));
-			tempName[1][x].setBounds(200+x*150, 30, 100, 50);
+			tempName[1][x].setBounds(200 + x * 150, 30, 100, 50);
 			frame.add(tempName[1][x]);
 		}
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -146,18 +144,19 @@ public class MindGUI extends JFrame implements ActionListener {
 
 	}
 
-	private void enableButtons(boolean c){
-		for(JButton[] buttonsList : tempName){
-			for(JButton button : buttonsList){
-				if (button != null){
+	private void enableButtons(boolean c) {
+		for (JButton[] buttonsList : tempName) {
+			for (JButton button : buttonsList) {
+				if (button != null) {
 					button.setEnabled(c);
 				}
 			}
 		}
 	}
-//dry: don't repeat yourself
-	private void init_client(){
-		if (client == null){
+
+	// dry: don't repeat yourself
+	private void init_client() {
+		if (client == null) {
 			client = new Client();
 			client.setListener(message -> {
 				parseMessage(message);
@@ -168,20 +167,18 @@ public class MindGUI extends JFrame implements ActionListener {
 		}
 	}
 
-	private void parseMessage(MessageModel message){
+	private void parseMessage(MessageModel message) {
 		System.out.println(message.toString());
-		Pins p = new Pins(message.getColor1(), message.getColor2(), message.getColor3(),message.getColor4());
+		Pins p = new Pins(message.getColor1(), message.getColor2(), message.getColor3(), message.getColor4());
 		drawnMind.paintPins(message.round, p);
-		//check winner
-		if (
-				message.getColor1().equals(Color.WHITE) &&
+		// check winner
+		if (message.getColor1().equals(Color.WHITE) &&
 				message.getColor2().equals(Color.WHITE) &&
 				message.getColor3().equals(Color.WHITE) &&
-				message.getColor4().equals(Color.WHITE)
-		){
+				message.getColor4().equals(Color.WHITE)) {
 			win();
 			return;
-		}else if (message.round >= 11){
+		} else if (message.round >= 11) {
 			lose();
 			return;
 		}
@@ -189,7 +186,7 @@ public class MindGUI extends JFrame implements ActionListener {
 		Mastermind.mainGui.showTurn(frame);
 	}
 
-		private void win() {
+	private void win() {
 		System.out.println("gewonnen");
 		clearFrame();
 		frame.setSize(380, 250);
@@ -214,8 +211,8 @@ public class MindGUI extends JFrame implements ActionListener {
 			System.exit(0);
 
 		}
-
 		);
+		
 
 		frame.add(panel0, BorderLayout.PAGE_END);
 		frame.add(panel1, BorderLayout.CENTER);
@@ -225,16 +222,10 @@ public class MindGUI extends JFrame implements ActionListener {
 	}
 
 
-		frame.add(panel0, BorderLayout.PAGE_END);
-		frame.add(panel1, BorderLayout.PAGE_START);
-		// frame.add(label);
-		frame.repaint();
-	}
-
-	private void clearFrame(){
-		for (JButton[] buttonsList : tempName){
-			for (JButton button : buttonsList){
-				if (button != null){
+	private void clearFrame() {
+		for (JButton[] buttonsList : tempName) {
+			for (JButton button : buttonsList) {
+				if (button != null) {
 					frame.remove(button);
 				}
 			}
@@ -242,7 +233,7 @@ public class MindGUI extends JFrame implements ActionListener {
 		frame.remove(drawnMind);
 	}
 
-	private void lose(){
+	private void lose() {
 		System.out.println("verloren");
 		clearFrame();
 		frame.setSize(380, 250);
@@ -281,6 +272,5 @@ public class MindGUI extends JFrame implements ActionListener {
 				JOptionPane.OK_OPTION);
 
 	}
-
 
 }
