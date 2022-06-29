@@ -36,10 +36,10 @@ public class MasterGUI extends JFrame implements ActionListener {
 	public void initializeMasterBoard() {
 
 
-		init_server();
+		init_server(); //Methodenaufruf, Server wird initalisiert
 
         System.out.println("checking");
-		drawnMaster = new DrawingMasterField();
+		drawnMaster = new DrawingMasterField(); //neues Objekt vom Typ drawnMaster wird initalisiert
 
 		tempName = new JButton[2][6];
 		selectedColor = Color.GRAY;
@@ -102,7 +102,7 @@ public class MasterGUI extends JFrame implements ActionListener {
 		frame.setResizable(false);
 
 	}
-
+	// 
 	public void clearBoard() {
 		for (int x = 1; x < 5; x++) {
 			tempName[0][x].setBackground(Color.GRAY);
@@ -146,7 +146,7 @@ public class MasterGUI extends JFrame implements ActionListener {
 				Mastermind.mainGui.showTurnChange(frame);
 			}
 
-			Mastermind.round = round + 1;
+			Mastermind.round = round +
 			this.clearBoard();
 			selectedColumn = -1;
 			selectedColor = Color.WHITE;
@@ -154,7 +154,7 @@ public class MasterGUI extends JFrame implements ActionListener {
 		}
 
     }
-
+	//startet Server, wenn noch kein Server initalisiert wurde 
 	private void init_server(){
 		if (server == null){
 			server = new Server();
