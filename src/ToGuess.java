@@ -40,12 +40,12 @@ public class ToGuess implements ActionListener {
 		frame = new JFrame();
 		frame.setTitle("Select colors...");
 		frame.setSize(500, 200);
-		frame.setLayout(new BorderLayout()); //BorderLayout wird festgelegt
+		frame.setLayout(new BorderLayout()); //BorderLayout wird dem frame festgelegt
 		JPanel panel = new JPanel(); 	//Objekte vom Typ JPanel erzeugt 
 		JPanel panel1 = new JPanel();
 		JPanel panel2 = new JPanel();
 		JPanel panel3 = new JPanel();
-		panel3.setLayout(new GridLayout(0, 2)); //Gridlayout mit zwei Spalten wird festgelegt 
+		panel3.setLayout(new GridLayout(0, 2)); //Gridlayout mit zwei Spalten wird panel3 zugeordnet
 
 		JLabel uberschriftColor = new JLabel(" Bitte wählen Sie vier Farben aus!");
 		panel.add(uberschriftColor);
