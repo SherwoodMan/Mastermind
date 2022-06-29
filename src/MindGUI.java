@@ -192,90 +192,38 @@ public class MindGUI extends JFrame implements ActionListener {
 		private void win() {
 		System.out.println("gewonnen");
 		clearFrame();
+		frame.setSize(380, 250);
+		frame.setLocationRelativeTo(null);
 
 		JLabel label = new JLabel("<html><body>Du hast gewonnen!<br>Herzlichen Glückwunsch!</body></html>");
-		label.setFont(new Font(label.getFont().getName(), Font.BOLD, 42));
-		label.setForeground(Color.blue);
+		label.setFont(new Font(label.getFont().getName(), Font.BOLD, 28));
+		label.setForeground(Color.MAGENTA);
 		label.setBounds(0, 0, frame.getWidth(), frame.getHeight());
-		frame.setTitle("Du hast gewonnen!");
 
+		frame.setTitle("Gewonnen!");
+		getContentPane().setBackground(Color.black);
 		frame.setLayout(new BorderLayout());
+
 		JPanel panel0 = new JPanel();
 		JPanel panel1 = new JPanel();
 		panel1.add(label);
 
-		JButton spieleButton = new JButton("noch einmal spielen?");
-		panel0.add(spieleButton);
-		spieleButton.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseClicked(java.awt.event.MouseEvent e) {
-				// Spiel neu beginnen, Aufruf von Main und server
-
-			}
-
-			@Override
-			public void mousePressed(java.awt.event.MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseReleased(java.awt.event.MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseEntered(java.awt.event.MouseEvent e) {
-				spieleButton.setToolTipText("Viel Glück!");
-
-			}
-
-			@Override
-			public void mouseExited(java.awt.event.MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
+		JButton beendeButton = new JButton("Spiel beenden");
+		panel0.add(beendeButton);
+		beendeButton.addActionListener((e) -> {
+			System.exit(0);
 
 		}
 
 		);
 
-		JButton beendeButton = new JButton("Beenden");
-		panel0.add(beendeButton);
-		beendeButton.addMouseListener(new MouseListener() {
+		frame.add(panel0, BorderLayout.PAGE_END);
+		frame.add(panel1, BorderLayout.CENTER);
+		// frame.add(label);
+		frame.repaint();
 
-			@Override
-			public void mouseClicked(java.awt.event.MouseEvent e) {
-				System.exit(0);
+	}
 
-			}
-
-			@Override
-			public void mousePressed(java.awt.event.MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseReleased(java.awt.event.MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseEntered(java.awt.event.MouseEvent e) {
-
-			}
-
-			@Override
-			public void mouseExited(java.awt.event.MouseEvent e) {
-				spieleButton.setToolTipText("Schade!");
-
-			}
-
-		});
 
 		frame.add(panel0, BorderLayout.PAGE_END);
 		frame.add(panel1, BorderLayout.PAGE_START);
@@ -297,11 +245,41 @@ public class MindGUI extends JFrame implements ActionListener {
 	private void lose(){
 		System.out.println("verloren");
 		clearFrame();
-		JLabel label = new JLabel("Lose");
-		label.setFont(new Font(label.getFont().getName(), Font.PLAIN, 96));
+		frame.setSize(380, 250);
+		frame.setLocationRelativeTo(null);
+
+		JLabel label = new JLabel("<html><body>Schade!<br>Du hast leider verloren.</body></html>");
+		label.setFont(new Font(label.getFont().getName(), Font.BOLD, 28));
+		label.setForeground(Color.MAGENTA);
 		label.setBounds(0, 0, frame.getWidth(), frame.getHeight());
-		frame.add(label);
+
+		frame.setTitle("Verloren!");
+		getContentPane().setBackground(Color.black);
+		frame.setLayout(new BorderLayout());
+
+		JPanel panel0 = new JPanel();
+		JPanel panel1 = new JPanel();
+		panel1.add(label);
+
+		JButton beendeButton = new JButton("Spiel beenden");
+		panel0.add(beendeButton);
+		beendeButton.addActionListener((e) -> {
+			System.exit(0);
+
+		}
+
+		);
+
+		frame.add(panel0, BorderLayout.PAGE_END);
+		frame.add(panel1, BorderLayout.CENTER);
+		// frame.add(label);
 		frame.repaint();
+	}
+
+	public void showTurnChange(Component c) {
+		JOptionPane.showMessageDialog(c, "Dein Mitspieler ist nun an der Reihe.", "Spielerwechselerinnerung",
+				JOptionPane.OK_OPTION);
+
 	}
 
 
