@@ -20,7 +20,8 @@ public class MasterGUI extends JFrame implements ActionListener {
 	private ArrayList<String> colorsS = new ArrayList<String>();
 
 	private ArrayList<String> colorsN = new ArrayList<String>();
-
+	
+	//zweidimensionales Jbutton-Array
 	private JButton[][] tempName;
 	private Color selectedColor;
 	private int selectedColumn;
