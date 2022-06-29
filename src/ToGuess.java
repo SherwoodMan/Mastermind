@@ -40,12 +40,12 @@ public class ToGuess implements ActionListener {
 		frame = new JFrame();
 		frame.setTitle("Select colors...");
 		frame.setSize(500, 200);
-		frame.setLayout(new BorderLayout());
-		JPanel panel = new JPanel();
+		frame.setLayout(new BorderLayout()); //BorderLayout wird festgelegt
+		JPanel panel = new JPanel(); 	//Objekte vom Typ JPanel erzeugt 
 		JPanel panel1 = new JPanel();
 		JPanel panel2 = new JPanel();
 		JPanel panel3 = new JPanel();
-		panel3.setLayout(new GridLayout(0, 2));
+		panel3.setLayout(new GridLayout(0, 2)); //Gridlayout mit zwei Spalten wird festgelegt 
 
 		JLabel uberschriftColor = new JLabel(" Bitte wählen Sie vier Farben aus!");
 		panel.add(uberschriftColor);
@@ -96,18 +96,22 @@ public class ToGuess implements ActionListener {
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		frame.add(panel, BorderLayout.PAGE_START);
+		//Panel werden auf dem BorderLayout angeordnet
+		frame.add(panel, BorderLayout.PAGE_START); 
 		frame.add(panel1, BorderLayout.LINE_START);
 		frame.add(panel2, BorderLayout.PAGE_END);
 		frame.add(panel3, BorderLayout.LINE_END);
+		
+		//zentriert
 		frame.setLocationRelativeTo(null);
+		//größe nicht änderbar
 		frame.setResizable(false);
 
 	}
 
 	public void clearBoard() {
 		for (int x = 1; x < 5; x++) {
-			tempName[0][x].setBackground(Color.WHITE);
+			tempName[0][x].setBackground(Color.WHITE); //Button werden auf weiß gestzt
 		}
 		selectedColumn = -1;
 		selectedColor = Color.WHITE;
@@ -130,8 +134,8 @@ public class ToGuess implements ActionListener {
 		}
 		if ("SUBMIT".equals(e.getActionCommand())) {
 			for (int x = 1; x < 5; x++) {
-				if (tempName[0][x].getBackground().equals(Color.WHITE)) {
-					System.out.println("Error");
+				if (tempName[0][x].getBackground().equals(Color.WHITE)) { 
+					System.out.println("Error");		//Fehlermeldung, wenn einem Button keine Farbe zugeteilt wurde 
 					Mastermind.mainGui.missingColorAlert(frame);
 					return;
 				}
