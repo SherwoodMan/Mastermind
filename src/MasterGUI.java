@@ -115,8 +115,7 @@ public class MasterGUI extends JFrame implements ActionListener {
 		if (colorsS.contains(e.getActionCommand())) {
 			selectedColor = colors[colorsS.indexOf(e.getActionCommand())];
 		} else if (colorsN.contains(e.getActionCommand())) {
-			Integer i = new Integer(e.getActionCommand());
-			selectedColumn = i.intValue();
+			selectedColumn = Integer.parseInt(e.getActionCommand());
 		}
 		if (selectedColumn != -1 && !(selectedColor.equals(Color.GRAY))) {
 			tempName[0][selectedColumn].setBackground(selectedColor);
@@ -146,7 +145,7 @@ public class MasterGUI extends JFrame implements ActionListener {
 				Mastermind.mainGui.showTurnChange(frame);
 			}
 
-			Mastermind.round = round +
+			Mastermind.round = round;
 			this.clearBoard();
 			selectedColumn = -1;
 			selectedColor = Color.WHITE;
