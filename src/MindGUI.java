@@ -1,13 +1,24 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 import ServerClient.Client;
 import ServerClient.MessageModel;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
-import javax.swing.*;
+/*
+ * Diese Klasse bearbeitet alle Aktionen die für das Fenster vom "Mind" gebraucht werden
+ */
 
 public class MindGUI extends JFrame implements ActionListener {
 
@@ -23,6 +34,11 @@ public class MindGUI extends JFrame implements ActionListener {
 	private JFrame frame;
 
 	private Client client;
+
+
+	/*
+	 * Diese Methode initialisiert den Server und baut das Fenster mit dem Spielfeld und den Buttons für die Interaktion auf
+	 */
 
 	public void initializeMindBoard() {
 
@@ -85,6 +101,11 @@ public class MindGUI extends JFrame implements ActionListener {
 
 	}
 
+
+	/*
+	 * Diese Methode setz die Farben der Buttons wieder auf die default-Einstellung
+	 */
+
 	public void clearBoard() {
 		for (int x = 1; x < 5; x++) {
 			tempName[0][x].setBackground(Color.WHITE);
@@ -92,6 +113,11 @@ public class MindGUI extends JFrame implements ActionListener {
 		selectedColumn = -1;
 		selectedColor = Color.WHITE;
 	}
+
+
+	/*
+	 * Diese Methode verarbeitet alle Interaktionen mit dem Fenster 
+	 */
 
 	public void actionPerformed(ActionEvent e) {
 		if (colorsS.contains(e.getActionCommand())) {
@@ -144,6 +170,11 @@ public class MindGUI extends JFrame implements ActionListener {
 
 	}
 
+
+	/*
+	 * Diese Methode aktiviert oder dektiviert die Buttons, damit man während der andere Spieler an Reihe ist nichts machen kann
+	 */
+
 	private void enableButtons(boolean c) {
 		for (JButton[] buttonsList : tempName) {
 			for (JButton button : buttonsList) {
@@ -154,7 +185,11 @@ public class MindGUI extends JFrame implements ActionListener {
 		}
 	}
 
-	// dry: don't repeat yourself
+
+	/*
+	 * Diese Methode startet den Server, wenn noch kein Server initalisiert wurde 
+	 */
+
 	private void init_client() {
 		if (client == null) {
 			client = new Client();
@@ -167,11 +202,15 @@ public class MindGUI extends JFrame implements ActionListener {
 		}
 	}
 
+
+	/*
+	 * 
+	 */
+
 	private void parseMessage(MessageModel message) {
 		System.out.println(message.toString());
 		Pins p = new Pins(message.getColor1(), message.getColor2(), message.getColor3(), message.getColor4());
 		drawnMind.paintPins(message.round, p);
-		// check winner
 		if (message.getColor1().equals(Color.WHITE) &&
 				message.getColor2().equals(Color.WHITE) &&
 				message.getColor3().equals(Color.WHITE) &&
@@ -186,6 +225,11 @@ public class MindGUI extends JFrame implements ActionListener {
 		Mastermind.mainGui.showTurn(frame);
 	}
 
+
+	/*
+	 * Diese Methode zeigt die Gewinnanimation an 
+	 */
+	
 	private void win() {
 		System.out.println("gewonnen");
 		clearFrame();
@@ -210,9 +254,7 @@ public class MindGUI extends JFrame implements ActionListener {
 		beendeButton.addActionListener((e) -> {
 			System.exit(0);
 
-		}
-		);
-		
+		});
 
 		frame.add(panel0, BorderLayout.PAGE_END);
 		frame.add(panel1, BorderLayout.CENTER);
@@ -221,6 +263,10 @@ public class MindGUI extends JFrame implements ActionListener {
 
 	}
 
+
+	/*
+	 * Diese Methode leert das Fenster
+	 */
 
 	private void clearFrame() {
 		for (JButton[] buttonsList : tempName) {
@@ -232,6 +278,11 @@ public class MindGUI extends JFrame implements ActionListener {
 		}
 		frame.remove(drawnMind);
 	}
+
+
+	/*
+	 * Diese Methode zeigt die Gewinnanimation an 
+	 */
 
 	private void lose() {
 		System.out.println("verloren");
@@ -265,12 +316,6 @@ public class MindGUI extends JFrame implements ActionListener {
 		frame.add(panel1, BorderLayout.CENTER);
 		// frame.add(label);
 		frame.repaint();
-	}
-
-	public void showTurnChange(Component c) {
-		JOptionPane.showMessageDialog(c, "Dein Mitspieler ist nun an der Reihe.", "Spielerwechselerinnerung",
-				JOptionPane.OK_OPTION);
-
 	}
 
 }
