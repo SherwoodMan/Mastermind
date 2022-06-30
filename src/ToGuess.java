@@ -3,13 +3,21 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
+
+
+/*
+ * Diese Klasse bearbietet alle Aktionen die für die Farbauswahl der zu erratenen Farbreihenfolge gebraucht wird 
+ */
 
 public class ToGuess implements ActionListener {
 
@@ -24,6 +32,11 @@ public class ToGuess implements ActionListener {
 	private ToGuessListener colorsChosenListener = null;
 
 	private JFrame frame;
+
+
+	/*
+	 * Diese Methode baut das Fenster mit der Farbauswahl und den Buttons für die Interaktion auf
+	 */
 
 	public void initializeBoard() {
 		tempName = new JButton[2][6];
@@ -40,12 +53,12 @@ public class ToGuess implements ActionListener {
 		frame = new JFrame();
 		frame.setTitle("Select colors...");
 		frame.setSize(500, 200);
-		frame.setLayout(new BorderLayout()); //BorderLayout wird dem frame festgelegt
-		JPanel panel = new JPanel(); 	//Objekte vom Typ JPanel erzeugt 
+		frame.setLayout(new BorderLayout()); 
+		JPanel panel = new JPanel(); 	
 		JPanel panel1 = new JPanel();
 		JPanel panel2 = new JPanel();
 		JPanel panel3 = new JPanel();
-		panel3.setLayout(new GridLayout(0, 2)); //Gridlayout mit zwei Spalten wird panel3 zugeordnet
+		panel3.setLayout(new GridLayout(0, 2)); 
 
 		JLabel uberschriftColor = new JLabel(" Bitte wählen Sie vier Farben aus!");
 		panel.add(uberschriftColor);
@@ -89,33 +102,43 @@ public class ToGuess implements ActionListener {
 				hilfeFenster.setSize(300, 400);
 				hilfeFenster.setLocationRelativeTo(null);
 				hilfeFenster.setVisible(true);
-				JLabel hilfeText = new JLabel(
-						"<html>Twinkle, twinkle, little star,<BR>How I wonder what you are.<BR>Up above the world so high,<BR>Like a diamond in the sky.</html>");
+				JLabel hilfeText = new JLabel();
+				try {
+					hilfeText = new JLabel(readFile());
+				} catch (FileNotFoundException e1) {
+					
+				}
 				hilfeFenster.add(hilfeText);
 		});
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		//Panel werden auf dem BorderLayout angeordnet
 		frame.add(panel, BorderLayout.PAGE_START); 
 		frame.add(panel1, BorderLayout.LINE_START);
 		frame.add(panel2, BorderLayout.PAGE_END);
 		frame.add(panel3, BorderLayout.LINE_END);
-		
-		//zentriert
 		frame.setLocationRelativeTo(null);
-		//größe nicht änderbar
 		frame.setResizable(false);
 
 	}
 
+
+	/*
+	 * Diese Methode setz die Farben der Buttons wieder auf die default-Einstellung
+	 */
+
 	public void clearBoard() {
 		for (int x = 1; x < 5; x++) {
-			tempName[0][x].setBackground(Color.WHITE); //Button werden auf weiß gestzt
+			tempName[0][x].setBackground(Color.WHITE);
 		}
 		selectedColumn = -1;
 		selectedColor = Color.WHITE;
 	}
+
+
+	/*
+	 * Diese Methode verarbeitet alle Interaktionen mit dem Fenster 
+	 */
 
 	public void actionPerformed(ActionEvent e) {
 		if (colorsS.contains(e.getActionCommand())) {
@@ -135,7 +158,6 @@ public class ToGuess implements ActionListener {
 		if ("SUBMIT".equals(e.getActionCommand())) {
 			for (int x = 1; x < 5; x++) {
 				if (tempName[0][x].getBackground().equals(Color.WHITE)) { 
-					System.out.println("Error");		//Fehlermeldung, wenn einem Button keine Farbe zugeteilt wurde 
 					Mastermind.mainGui.missingColorAlert(frame);
 					return;
 				}
@@ -143,6 +165,12 @@ public class ToGuess implements ActionListener {
 			submit();
 		}
 	}
+
+
+	/*
+	 * Diese Methode gibt die Ausgewählte Farbreihenfolge weiter
+	 */
+
 	private void submit(){
 		if (colorsChosenListener != null){
 			Color c1 = tempName[0][1].getBackground();
@@ -154,6 +182,27 @@ public class ToGuess implements ActionListener {
 		}
 		frame.dispose();
 	}
+
+
+	/*
+	 * Diese Methode liest die Anleitung aus 
+	 */
+	private String readFile() throws FileNotFoundException{
+		String Anleitung = "<html>";
+		File doc = new File("lib\\Anleitung.txt");
+		Scanner obj = new Scanner(doc);
+			while (obj.hasNextLine()){
+			    Anleitung = Anleitung + "<br>" +obj.nextLine();
+			}
+		
+		Anleitung = Anleitung + "<html>";
+        return Anleitung;
+	} 
+
+
+	/*
+	 * setter für den ActionListener
+	 */
 
 	public void setToGuessListener(ToGuessListener listener) {
 		this.colorsChosenListener = listener;
