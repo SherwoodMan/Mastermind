@@ -1,5 +1,10 @@
 import java.awt.Color;
 
+
+/*
+ * Diese Klasse startet das Programm und kümmert sich um übergeordnete Angelegenenheiten 
+ */
+
 public class Mastermind {
     private static Control con = new Control();
     private static Order toGuess = new Order();
@@ -8,8 +13,14 @@ public class Mastermind {
     static MainGUI mainGui = new MainGUI();
     static int round;
 
+
+    /*
+     * Dies Methode startet das verdammte Spiel 
+     * https://www.youtube.com/watch?v=q8SWMAQYQf0
+     */
+
     public static void main(String[] args) {
-        randomOrder(toGuess);
+        //randomOrder(toGuess);
         System.out.println(toGuess.toString());
         greyingArray();
         
@@ -17,6 +28,9 @@ public class Mastermind {
     }
 
     
+    /*
+     * Diese Methode kann eine randomisierte Order erstellen
+     */
 
     public static Order randomOrder(Order randomOrder) {
         int zero, one, two, three;
@@ -41,6 +55,11 @@ public class Mastermind {
         return randomOrder;
     }
 
+
+    /*
+     * Das Reaktionsarray wird vergraut 
+     */
+
     private static void greyingArray() {
         for (int i = 0; i < guesses.length; i++) {
             for (int j = 0; j < guesses[1].length; j++) {
@@ -58,13 +77,28 @@ public class Mastermind {
         }
     }
 
+
+    /*
+     * getter für die Order 
+     */
+
     public static Order getToGuess() {
         return toGuess;
     }
 
+
+    /*
+     * setter für die zu erratene Order 
+     */
+
     public static void setToGuess(Order order){
         toGuess = order;
     }
+
+
+    /*
+     * getter für die Kontrolle 
+     */
 
     public static Control getCon() {
         return con;

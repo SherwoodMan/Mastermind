@@ -1,0 +1,8 @@
+Der Master stellt eine Farbreihenfolge
+Das Mind muss diese erratene
+Das Mind kann in einer Runde eine Farbreihenfolge austesten.
+Der Master reagiert mit verschieden Farbenen Pins darauf
+Schwarzer Pin = richtige Farbe aber falsche Position
+Weisser Pin = richtige Farbe und richtige Position
+
+Das Mind hat gewonnen, wenn bis zum 12. Zug die Reihenfolge gefunden wurde.

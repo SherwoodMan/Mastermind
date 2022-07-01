@@ -10,6 +10,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 
+/*
+ * Diese Klasse bearbeitet alle Aktionen die für das Fenster vom "Master" gebraucht werden
+ */
+
 public class MasterGUI extends JFrame implements ActionListener {
 
 	private JFrame frame;
@@ -21,25 +25,34 @@ public class MasterGUI extends JFrame implements ActionListener {
 
 	private ArrayList<String> colorsN = new ArrayList<String>();
 	
-	//zweidimensionales Jbutton-Array
 	private JButton[][] tempName;
 	private Color selectedColor;
 	private int selectedColumn;
 
 	private Server server;
-	private boolean connected = false;
-	private boolean myTurn = false;
+	/*
+	 * ##########
+	 * private boolean connected = false;
+	 * private boolean myTurn = false;
 
-	private final Color[] colorsValues = { Color.red, Color.blue, Color.green, Color.yellow, Color.MAGENTA, Color.darkGray };
-	private final String[] colorsNames = { "RED", "BLUE", "GREEN", "YELLOW", "MAGENTA", "DARK_GRAY" };
+	 * private final Color[] colorsValues = { Color.red, Color.blue, Color.green, Color.yellow, Color.MAGENTA, Color.darkGray };
+	 * private final String[] colorsNames = { "RED", "BLUE", "GREEN", "YELLOW", "MAGENTA", "DARK_GRAY" };
+	 * ##########
+	 */
+	
 
+
+	/*
+	 * Diese Methode initialisiert den Server und baut das Fenster mit dem Spielfeld und den Buttons für die Interaktion auf
+	 */
+	
 	public void initializeMasterBoard() {
 
 
-		init_server(); //Methodenaufruf, Server wird initalisiert
+		init_server(); 
 
         System.out.println("checking");
-		drawnMaster = new DrawingMasterField(); //neues Objekt vom Typ drawnMaster wird initalisiert
+		drawnMaster = new DrawingMasterField(); 
 
 		tempName = new JButton[2][6];
 		selectedColor = Color.GRAY;
@@ -102,7 +115,12 @@ public class MasterGUI extends JFrame implements ActionListener {
 		frame.setResizable(false);
 
 	}
-	// 
+
+
+	/*
+	 * Diese Methode setz die Farben der Buttons wieder auf die default-Einstellung
+	 */
+
 	public void clearBoard() {
 		for (int x = 1; x < 5; x++) {
 			tempName[0][x].setBackground(Color.GRAY);
@@ -111,11 +129,17 @@ public class MasterGUI extends JFrame implements ActionListener {
 		selectedColor = Color.GRAY;
 	}
 
+
+	/*
+	 * Diese Methode verarbeitet alle Interaktionen mit dem Fenster 
+	 */
+
 	public void actionPerformed(ActionEvent e) {
 		if (colorsS.contains(e.getActionCommand())) {
 			selectedColor = colors[colorsS.indexOf(e.getActionCommand())];
 		} else if (colorsN.contains(e.getActionCommand())) {
-			selectedColumn = Integer.parseInt(e.getActionCommand());
+			Integer i = new Integer(e.getActionCommand());
+			selectedColumn = i.intValue();
 		}
 		if (selectedColumn != -1 && !(selectedColor.equals(Color.GRAY))) {
 			tempName[0][selectedColumn].setBackground(selectedColor);
@@ -145,7 +169,7 @@ public class MasterGUI extends JFrame implements ActionListener {
 				Mastermind.mainGui.showTurnChange(frame);
 			}
 
-			Mastermind.round = round;
+			Mastermind.round = round ++;
 			this.clearBoard();
 			selectedColumn = -1;
 			selectedColor = Color.WHITE;
@@ -153,7 +177,12 @@ public class MasterGUI extends JFrame implements ActionListener {
 		}
 
     }
-	//startet Server, wenn noch kein Server initalisiert wurde 
+
+
+	/*
+	 * Diese Methode startet den Server, wenn noch kein Server initalisiert wurde 
+	 */
+
 	private void init_server(){
 		if (server == null){
 			server = new Server();
@@ -166,25 +195,37 @@ public class MasterGUI extends JFrame implements ActionListener {
 		}
 	}
 
+
+	/*
+	 * 
+	 */
+
 	private void parseMessage(MessageModel message){
 		System.out.println(message.toString());
 		Order o = new Order(message.getColor1(), message.getColor2(), message.getColor3(), message.getColor4());
 		drawnMaster.paintOrder(message.round, o);
-		// activate button to be able to send response to client
 		enableButtons(true);
 		Mastermind.mainGui.showTurn(frame);
 	}
 
-	// nicht nur Variable setzen sondern auch alle von dieser Variable abhängigen Komponenten darüber informieren,
-	// dass diese Variable einen neuen Wert hat
-	private void setConnected(boolean c){
-		this.connected = c;
-		enableButtons(c);
-	}
 
 	/*
-	* message: "int round,String color1, String color2..."
-	* */
+	 * Diese Methode setzt den Verbindungsstatus
+	 */
+	
+	/*
+	 * #######
+	 * private void setConnected(boolean c){
+	 * 	this.connected = c;
+	 *	enableButtons(c);
+	 *	}
+	 * #######
+	 */
+	
+
+	/*
+	 * Diese Methode aktiviert oder dektiviert die Buttons, damit man während der andere Spieler an Reihe ist nichts machen kann
+	 */
 
 	private void enableButtons(boolean c){
 		for(JButton[] buttonsList : tempName){
