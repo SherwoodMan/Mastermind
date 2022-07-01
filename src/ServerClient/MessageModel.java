@@ -3,6 +3,9 @@ package ServerClient;
 import java.awt.*;
 import java.io.Serializable;
 
+/*
+* Diese Klasse repräsentiert eine Nachricht die zwischen Server und Client ausgetauscht wird
+* */
 
 public class MessageModel implements Serializable {
     public int round;
@@ -11,6 +14,10 @@ public class MessageModel implements Serializable {
     private Color color3;
     private Color color4;
 
+
+    /*
+    *  Dies ist ein Konstruktor für die Klasse
+    * */
     public MessageModel(int round, Color color1, Color color2, Color color3, Color color4) {
         this.round = round;
         this.color1 = color1;

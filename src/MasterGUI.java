@@ -159,17 +159,16 @@ public class MasterGUI extends JFrame implements ActionListener {
 
 			Pins toCompare = new Pins(c1, c2, c3, c4);
 			drawnMaster.paintPins(Mastermind.round, toCompare);
-			int round = Mastermind.round;
 
-			MessageModel message = new MessageModel(round, c1, c2, c3, c4);
+			MessageModel message = new MessageModel(Mastermind.round, c1, c2, c3, c4);
 			server.sendObject(message);
 			enableButtons(false);
 
-			if(round< 11 && !((c1.equals(Color.WHITE)) && (c2.equals(Color.WHITE)) && (c3.equals(Color.WHITE)) && (c4.equals(Color.WHITE))) ){
+			if(Mastermind.round < 11 && !((c1.equals(Color.WHITE)) && (c2.equals(Color.WHITE)) && (c3.equals(Color.WHITE)) && (c4.equals(Color.WHITE))) ){
 				Mastermind.mainGui.showTurnChange(frame);
 			}
 
-			Mastermind.round = round ++;
+			Mastermind.round++;
 			this.clearBoard();
 			selectedColumn = -1;
 			selectedColor = Color.WHITE;
