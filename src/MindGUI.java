@@ -281,7 +281,7 @@ public class MindGUI extends JFrame implements ActionListener {
 
 
 	/*
-	 * Diese Methode zeigt die Gewinnanimation an 
+	 * Diese Methode zeigt das Verloren-Frame an 
 	 */
 
 	private void lose() {
